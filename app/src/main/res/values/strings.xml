@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TodoListSample</string>
+    <string name="app_name">tmdb-redux-app</string>
 
     <!-- Server error messages -->
     <string name="NO_CONTENT_SERVER_ERROR">Nenhum item foi encontrado.</string>

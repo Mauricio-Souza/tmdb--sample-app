@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='TodoListSample'
+rootProject.name='tmdb-redux-app'
