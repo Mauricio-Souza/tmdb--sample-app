@@ -1,2 +1,2 @@
 # tmdb--sample-app
-sample application showing movies and movies details from TMDb API
+sample application using android-redux to show movies and movies details from TMDb API
