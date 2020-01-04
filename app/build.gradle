@@ -1,0 +1,99 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+
+    compileSdkVersion versions.compileSdkVersion
+    buildToolsVersion versions.buildToolsVersion
+    defaultConfig {
+        applicationId "com.msousa.todolistsample"
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
+        versionCode versions.versionCode
+        versionName versions.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
+            buildConfigField "String", "API_KEY", "\"284ae7fa6079130d7e1ef806fd98bd3e\""
+            buildConfigField "String", "API_TOKEN", "\"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyODRhZTdmYTYwNzkxMzBkN2UxZWY4MDZmZDk4YmQzZSIsInN1YiI6IjVkZWE2Mzk4ZGI3MmMwMDAxMWY2ZWU2NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.7GM5BOr3z2okm6LDzFmpTBDai8R7ALLh-exoHYpIK6A\""
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    kotlinOptions {
+        freeCompilerArgs = ["-Xallow-stateType-return-type"]
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //AndroidX
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.legacy
+    implementation deps.androidx.core
+    implementation deps.androidx.recycler_view
+    implementation deps.androidx.constraint_layout
+    implementation deps.androidx.motion_layout
+    implementation deps.androidx.material_theme
+    // Kotlin
+    implementation deps.kotlin.jdk
+    implementation deps.kotlin.jdk8
+    implementation deps.kotlin.test
+    implementation deps.kotlin.reflect
+    // Timber
+    implementation deps.timber
+    // Glide
+    implementation deps.glide
+    kapt deps.glide
+    // Kodein
+    implementation deps.kodein.jvm
+    implementation deps.kodein.framework
+    //implementation deps.kodein.generic
+    implementation deps.kodein.erased
+    // Coroutines
+    implementation deps.coroutines
+    // Retrofit
+    implementation deps.retrofit.core
+    implementation deps.retrofit.converter
+    implementation deps.retrofit.adapter
+    // OkHttp
+    implementation deps.okhttp.logging
+    implementation deps.okhttp.core
+    // Mockito
+    implementation deps.mockito.core
+    implementation deps.mockito.mockito_kotlin
+    // Lifecycle
+    implementation deps.lifecycle.view_model
+    implementation deps.lifecycle.live_data
+    implementation deps.lifecycle.runtime
+    implementation deps.lifecycle.extensions
+    implementation deps.lifecycle.java8
+    // JUnit
+    testImplementation deps.junit.core
+    androidTestImplementation deps.junit.extensions
+    // Espresso
+    androidTestImplementation deps.espresso
+}

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">TodoListSample</string>
+
+    <!-- Server error messages -->
+    <string name="NO_CONTENT_SERVER_ERROR">Nenhum item foi encontrado.</string>
+    <string name="SERVER_TEMPORARILY_UNAVAILABLE_ERROR">Serviço temporariamente indisponível.</string>
+    <string name="UNAUTHORIZED_SERVER_ERROR">Você não tem permissão para acessar esses dados.</string>
+    <string name="BAD_REQUEST_SERVER_ERROR">Encontramos problemas ao processar sua requisição.</string>
+    <string name="UNKNOWN_SERVER_ERROR">Ocorreu um erro desconhecido.</string>
+    <!-- End Server error messages -->
+
+    <!-- Network error message -->
+    <string name="NO_INTERNET_CONNECTION_ERROR">Sem conexão com a internet!</string>
+    <!-- End Network error message -->
+</resources>
