@@ -50,7 +50,6 @@ class Store(
                     newState = state
                 }
             }
-            is NavigationAction -> { }
             is AppBehaviorAction -> { }
         }
         return newState

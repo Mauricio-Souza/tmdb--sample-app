@@ -12,4 +12,6 @@
     <!-- Network error message -->
     <string name="NO_INTERNET_CONNECTION_ERROR">Sem conexão com a internet!</string>
     <!-- End Network error message -->
+    
+    <string name="movies_text">Filmes</string>
 </resources>

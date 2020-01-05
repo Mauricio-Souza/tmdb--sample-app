@@ -1,23 +1,31 @@
 package com.msousa.tmdbredux.presentation.models.mapper
 
+import com.msousa.tmdbredux.BuildConfig
 import com.msousa.tmdbredux.data.remote.exceptions.TMDbException
+import com.msousa.tmdbredux.data.remote.responses.Movie
 import com.msousa.tmdbredux.redux.middlewares.mappers.models.GenreMapper
 import com.msousa.tmdbredux.redux.middlewares.mappers.models.MovieDetailsMapper
 import com.msousa.tmdbredux.redux.middlewares.mappers.models.MovieListMapper
 import com.msousa.tmdbredux.presentation.models.viewObjects.*
 
 fun MovieListMapper.toVO() = MoviesVO(
-    posterPath = posterPath,
     name = name,
-    description = description,
-    id = id,
-    items = items
+    items = items.map()
 )
 
 fun List<GenreMapper>.mapToVO() = map {
     GenreVO(
         id = it.id.toString(),
         name = it.name
+    )
+}
+
+fun List<Movie>.map() = map {
+    MovieVO (
+        id = it.id.toString(),
+        posterPath = "${BuildConfig.BASE_IMAGE_URL}${it.posterPath}",
+        title = it.title,
+        voteAverage = it.voteAverage.toString()
     )
 }
 

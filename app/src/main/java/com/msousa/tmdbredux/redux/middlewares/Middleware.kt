@@ -12,9 +12,6 @@ class Middleware(
 
     override suspend fun apply(action: Action) = flow {
        var newAction = action
-        if (connectivityManager.noInternetConnection()) {
-
-        }
         middlewareList.forEachIndexed { index, iNext ->
             newAction = middlewareList[index].onNext(newAction, iNext)
         }

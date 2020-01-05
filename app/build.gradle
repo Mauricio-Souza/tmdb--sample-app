@@ -23,6 +23,7 @@ android {
         }
         debug {
             buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
+            buildConfigField "String", "BASE_IMAGE_URL", "\"https://image.tmdb.org/t/p/w500\""
             buildConfigField "String", "API_KEY", "\"284ae7fa6079130d7e1ef806fd98bd3e\""
             buildConfigField "String", "API_TOKEN", "\"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyODRhZTdmYTYwNzkxMzBkN2UxZWY4MDZmZDk4YmQzZSIsInN1YiI6IjVkZWE2Mzk4ZGI3MmMwMDAxMWY2ZWU2NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.7GM5BOr3z2okm6LDzFmpTBDai8R7ALLh-exoHYpIK6A\""
             minifyEnabled false

@@ -6,7 +6,9 @@ import com.msousa.tmdbredux.redux.state.State
 
 typealias StringResource = R.string
 
-typealias NavigateRouter<reified T> = () -> Class<T>
+typealias ImageResource = R.drawable
+
+typealias LayoutResource = R.layout
 
 typealias StateLiveData = LiveData<State>
 

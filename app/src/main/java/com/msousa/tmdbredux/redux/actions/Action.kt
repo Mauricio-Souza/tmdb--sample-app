@@ -1,7 +1,5 @@
 package com.msousa.tmdbredux.redux.actions
 
-import com.msousa.tmdbredux.NavigateRouter
-import com.msousa.tmdbredux.presentation.HomeActivity
 import com.msousa.tmdbredux.presentation.models.viewObjects.ErrorMessageVO
 
 sealed class Action
@@ -12,11 +10,11 @@ sealed class ServerResponse : Action() {
     data class Failure(val error: ErrorMessageVO) : ServerResponse()
 }
 
-sealed class ServerRequest : Action() {
+sealed class ViewAction : Action() {
 
-    data class GetMovieDetails(val movieId: String) : ServerRequest()
-    object Authenticate : ServerRequest()
-    object GetMovies : ServerRequest()
+    data class OnMovieClicked(val movieId: String) : ViewAction()
+    object OnLoginButtonClicked : ViewAction()
+    object OnMainActivityCreated : ViewAction()
 }
 
 sealed class DatabaseOperation : Action() {
@@ -25,13 +23,6 @@ sealed class DatabaseOperation : Action() {
     data class Update<T>(val data: T) : DatabaseOperation()
     data class Delete<T>(val data: T) : DatabaseOperation()
     data class Select<T>(val data: T) : DatabaseOperation()
-}
-
-sealed class NavigationAction : Action() {
-
-    object ToHome : NavigateRouter<HomeActivity>, NavigationAction() {
-        override fun invoke() = HomeActivity::class.java
-    }
 }
 
 sealed class AppBehaviorAction : Action() {
