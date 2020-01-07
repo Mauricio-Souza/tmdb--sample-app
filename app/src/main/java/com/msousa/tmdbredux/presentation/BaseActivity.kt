@@ -8,6 +8,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.ViewModelProviders
+import com.msousa.tmdbredux.StringResource
 import com.msousa.tmdbredux.presentation.models.observer.LoadingObserver
 import com.msousa.tmdbredux.redux.store.IStore
 import com.msousa.tmdbredux.redux.store.Store
@@ -43,6 +44,7 @@ abstract class BaseActivity : AppCompatActivity(), LifecycleOwner, KodeinAware {
     }
 
     protected fun loadingObserverWithBehavior(viewId: Int) = LoadingObserver { isLoading ->
+        check(viewId != 0) { getString(StringResource.INVALID_RESOURCE_ID) }
         findViewById<ProgressBar>(viewId)?.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

@@ -32,7 +32,6 @@ class MovieDetailsActivity : BaseActivity() {
         store.stateLiveData.observe(this, movieDetailsObserver)
 
         store.stateLiveData.observe(this, loadingObserverWithBehavior(ResourceId.progressBar))
-
     }
 
     private val movieDetailsObserver = StateObserver<MovieDetailsVO> { movie ->

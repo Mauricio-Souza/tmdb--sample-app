@@ -12,7 +12,6 @@ fun ImageView.loadImageUrlWithCornerRadius(url: String, radius: Int) {
     Glide.with(context)
         .load(url)
         .transform(RoundedCorners(radius))
-        .fallback(ImageResource.avengers_poster)
         .error(ImageResource.avengers_poster)
         .into(this)
 }

@@ -15,4 +15,5 @@
     
     <string name="movies_text">Filmes</string>
     <string name="MISSING_ARGUMENT_REQUIRED_ERROR">Missing argument required</string>
+    <string name="INVALID_RESOURCE_ID">resource id not found</string>
 </resources>
