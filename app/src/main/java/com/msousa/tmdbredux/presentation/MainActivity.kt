@@ -6,12 +6,12 @@ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.msousa.tmdbredux.LayoutResource
+import com.msousa.tmdbredux.ResourceId
 import com.msousa.tmdbredux.presentation.models.observer.LoadingObserver
 import com.msousa.tmdbredux.redux.actions.ViewAction.*
 import com.msousa.tmdbredux.presentation.models.observer.StateObserver
 import com.msousa.tmdbredux.presentation.models.viewObjects.ErrorMessageVO
 import com.msousa.tmdbredux.presentation.models.viewObjects.MoviesVO
-import com.msousa.tmdbredux.redux.actions.ServerResponse
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -25,11 +25,11 @@ class MainActivity : BaseActivity() {
 
         store.dispatcher(OnMainActivityCreated)
 
-        store.stateLiveData.observe(this, loadingObserver)
+        store.stateLiveData.observe(this, loadingObserverWithBehavior(ResourceId.progressBar))
 
         store.stateLiveData.observe(this, moviesObserver)
 
-        store.stateLiveData.observe(this, routerObserver)
+        store.stateLiveData.observe(this, navigationObserver)
 
         store.stateLiveData.observe(this, errorObserver)
 
@@ -43,16 +43,14 @@ class MainActivity : BaseActivity() {
         recyclerMovies.adapter = moviesAdapter
     }
 
-    private val loadingObserver = LoadingObserver { isLoading ->
-        progressBar?.visibility = if (isLoading) View.VISIBLE else View.GONE
-    }
-
     private val moviesObserver = StateObserver<MoviesVO> { movies ->
-        titlePage?.text = movies?.name
-        moviesAdapter.submitList(movies?.items)
+        movies?.run {
+            showActionBarWithTitle(name)
+            moviesAdapter.submitList(items)
+        }
     }
 
-    private val routerObserver = StateObserver<Intent> { intent ->
+    private val navigationObserver = StateObserver<Intent> { intent ->
         startActivity(intent)
     }
 

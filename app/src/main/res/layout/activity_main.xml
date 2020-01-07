@@ -6,27 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".presentation.MainActivity">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/titlePage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/ibmplexsans_bold"
-        android:textColor="@color/gray"
-        android:textSize="@dimen/text_22"
-        android:layout_margin="@dimen/margin_5"
-        tools:text="Marvel"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/recyclerMovies"
-        app:layout_constraintRight_toRightOf="@id/recyclerMovies"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerMovies"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_margin="@dimen/margin_10"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintTop_toBottomOf="@id/titlePage"
+        app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

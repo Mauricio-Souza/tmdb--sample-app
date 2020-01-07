@@ -4,8 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.msousa.tmdbredux.LayoutResource
-import com.msousa.tmdbredux.R
+import com.msousa.tmdbredux.ResourceId
+import com.msousa.tmdbredux.StringResource
+import com.msousa.tmdbredux.presentation.models.observer.StateObserver
+import com.msousa.tmdbredux.presentation.models.viewObjects.MovieDetailsVO
 import com.msousa.tmdbredux.redux.actions.ViewAction.*
+import kotlinx.android.synthetic.main.activity_home.*
 
 class MovieDetailsActivity : BaseActivity() {
 
@@ -23,7 +27,18 @@ class MovieDetailsActivity : BaseActivity() {
 
         intent.extras?.getString(MOVIE_ID)?.run {
             store.dispatcher(OnMovieDetailsActivityCreated(this))
-        }
+        } ?: error(getString(StringResource.MISSING_ARGUMENT_REQUIRED_ERROR))
 
+        store.stateLiveData.observe(this, movieDetailsObserver)
+
+        store.stateLiveData.observe(this, loadingObserverWithBehavior(ResourceId.progressBar))
+
+    }
+
+    private val movieDetailsObserver = StateObserver<MovieDetailsVO> { movie ->
+        movie?.run {
+            showActionBarWithTitle(originalTitle)
+            home?.text = toString()
+        }
     }
 }

@@ -36,12 +36,13 @@ class MoviesAdapter(
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val radius = 10
 
-        fun bind(movie: MovieVO) = with(itemView) {
-            moviePoster?.loadImageUrlWithCornerRadius(url = movie.posterPath, radius = radius)
-            movieName?.text = movie.title
-            movieRate?.text = movie.voteAverage
-
-            moviePoster?.setOnClickListener { action(movie.id) }
+        fun bind(item: MovieVO) = with(itemView) {
+            item.run {
+                moviePoster?.loadImageUrlWithCornerRadius(url = posterPath, radius = radius)
+                movieName?.text = title
+                movieRate?.text = voteAverage
+                moviePoster?.setOnClickListener { action(id) }
+            }
         }
     }
 }

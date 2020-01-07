@@ -9,6 +9,8 @@ typealias NavigationRouter = () -> Intent
 
 typealias StringResource = R.string
 
+typealias ResourceId = R.id
+
 typealias ImageResource = R.drawable
 
 typealias LayoutResource = R.layout

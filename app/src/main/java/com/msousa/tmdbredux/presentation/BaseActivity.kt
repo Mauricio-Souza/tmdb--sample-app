@@ -1,13 +1,17 @@
 package com.msousa.tmdbredux.presentation
 
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.ViewModelProviders
+import com.msousa.tmdbredux.presentation.models.observer.LoadingObserver
 import com.msousa.tmdbredux.redux.store.IStore
 import com.msousa.tmdbredux.redux.store.Store
+import kotlinx.android.synthetic.main.activity_home.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.erased.instance
@@ -22,6 +26,7 @@ abstract class BaseActivity : AppCompatActivity(), LifecycleOwner, KodeinAware {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
 
         lifecycleRegistry = LifecycleRegistry(this)
 
@@ -29,4 +34,15 @@ abstract class BaseActivity : AppCompatActivity(), LifecycleOwner, KodeinAware {
     }
 
     override fun getLifecycle(): Lifecycle = lifecycleRegistry
+
+    protected fun showActionBarWithTitle(title: String) {
+        supportActionBar?.apply {
+            show()
+            this.title = title
+        }
+    }
+
+    protected fun loadingObserverWithBehavior(viewId: Int) = LoadingObserver { isLoading ->
+        findViewById<ProgressBar>(viewId)?.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
 }
