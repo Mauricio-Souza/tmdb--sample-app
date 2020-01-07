@@ -1,21 +1,13 @@
 package com.msousa.tmdbredux.data.remote
 
-import com.msousa.tmdbredux.data.remote.responses.GuestSessionResponse
 import com.msousa.tmdbredux.data.remote.responses.MovieDetailsResponse
 import com.msousa.tmdbredux.data.remote.responses.MovieListResponse
-import com.msousa.tmdbredux.data.remote.responses.UserTokenResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface TMDbApi {
-
-    @GET(value = "authentication/guest_session/new")
-    fun getGuestSession() : Deferred<Response<GuestSessionResponse>>
-
-    @GET(value = "authentication/token/new")
-    fun requestToken() : Deferred<Response<UserTokenResponse>>
 
     @GET(value = "list/1")
     fun getMovies() : Deferred<Response<MovieListResponse>>

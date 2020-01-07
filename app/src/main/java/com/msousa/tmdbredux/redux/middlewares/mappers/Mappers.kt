@@ -3,18 +3,6 @@ package com.msousa.tmdbredux.redux.middlewares.mappers
 import com.msousa.tmdbredux.data.remote.responses.*
 import com.msousa.tmdbredux.redux.middlewares.mappers.models.*
 
-fun GuestSessionResponse.toMapper() = GuestSessionMapper(
-    expiresAt = expiresAt,
-    guestSessionId = guestSessionId,
-    success = success
-)
-
-fun UserTokenResponse.toMapper() = UserTokenMapper(
-    expiresAt = expiresAt,
-    requestToken = requestToken,
-    success = success
-)
-
 fun MovieListResponse.toMapper() = MovieListMapper(
     posterPath = posterPath,
     name = name,

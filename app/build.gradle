@@ -47,6 +47,11 @@ android {
     kotlinOptions {
         freeCompilerArgs = ["-Xallow-stateType-return-type"]
     }
+
+    useLibrary 'android.test.runner'
+
+    useLibrary 'android.test.base'
+    useLibrary 'android.test.mock'
 }
 
 dependencies {
@@ -92,9 +97,15 @@ dependencies {
     implementation deps.lifecycle.runtime
     implementation deps.lifecycle.extensions
     implementation deps.lifecycle.java8
+    testImplementation deps.lifecycle.livedataTesting
     // JUnit
     testImplementation deps.junit.core
     androidTestImplementation deps.junit.extensions
+    // Truth
+    testImplementation deps.truth.core
+    testImplementation deps.truth.ext
+    // Mockk
+    testImplementation deps.mockk
     // Espresso
     androidTestImplementation deps.espresso
 }

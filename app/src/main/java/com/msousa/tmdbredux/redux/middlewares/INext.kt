@@ -4,5 +4,5 @@ import com.msousa.tmdbredux.redux.actions.Action
 
 interface INext {
 
-    suspend fun onNext(action: Action, next: INext): Action
+    suspend fun onNext(action: Action): Action
 }

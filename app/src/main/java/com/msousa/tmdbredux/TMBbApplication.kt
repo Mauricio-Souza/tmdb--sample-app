@@ -29,7 +29,6 @@ class TMBbApplication : Application(), KodeinAware {
         bind() from singleton { EndOfChain() }
         bind<IMiddleware>() with singleton {
             Middleware(
-                applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager,
                 listOf(
                     instance<ServerMiddleware>(),
                     instance<DatabaseMiddleware>(),
