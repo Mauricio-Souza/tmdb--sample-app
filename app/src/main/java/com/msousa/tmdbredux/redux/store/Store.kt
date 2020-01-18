@@ -23,7 +23,6 @@ class Store(
     override val stateLiveData: StateLiveData
         get() = _stateLiveData
 
-
     override fun getState(): State = currentState
 
     override fun dispatcher(action: Action) {

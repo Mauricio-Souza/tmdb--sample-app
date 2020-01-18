@@ -16,7 +16,7 @@ ext.versions = [
         espresso : '3.1.1',
         truth : '1.0',
         truth_androidx : '1.2.0',
-        mockk : '1.9',
+        mockk : '1.9.3.kotlin12',
         kotlin : '1.3.50',
         junit : '4.12',
         junit_ext : '1.1.0',
@@ -60,7 +60,8 @@ ext.deps = [
         ],
         'mockito' : [
                 core        : "org.mockito:mockito-core:${versions.mockito}",
-                mockito_kotlin  : "com.nhaarman.mockitokotlin2:mockito-kotlin:${versions.mockito_kotlin}"
+                mockito_kotlin  : "com.nhaarman.mockitokotlin2:mockito-kotlin:${versions.mockito_kotlin}",
+                inline :  "org.mockito:mockito-inline:${versions.mockito}"
         ],
         'kotlin'  : [
                 plugin      : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}",
@@ -77,8 +78,15 @@ ext.deps = [
                 ext : "androidx.test.ext:truth:${versions.truth_androidx}",
                 core : "com.google.truth:truth:${versions.truth}"
         ],
-        'mockk' : "io.mockk:mockk:${versions.mockk}",
-        'coroutines' : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines_core}",
+        'mockk' : [
+                test : "io.mockk:mockk:${versions.mockk}",
+                androidTest : "io.mockk:mockk-android:${versions.mockk}"
+        ],
+        'coroutines' : [
+                test : "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.coroutines_core}",
+                core : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines_core}",
+                android : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines_core}"
+        ],
         'timber' : "com.jakewharton.timber:timber:${versions.timber}",
         'glide' : "com.github.bumptech.glide:glide:${versions.glide}",
         'espresso' : "androidx.test.espresso:espresso-core:${versions.espresso}",

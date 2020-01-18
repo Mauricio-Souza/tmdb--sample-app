@@ -44,6 +44,10 @@ android {
         experimental = true
     }
 
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
     kotlinOptions {
         freeCompilerArgs = ["-Xallow-stateType-return-type"]
     }
@@ -80,7 +84,9 @@ dependencies {
     //implementation deps.kodein.generic
     implementation deps.kodein.erased
     // Coroutines
-    implementation deps.coroutines
+    implementation deps.coroutines.core
+    implementation deps.coroutines.android
+    testImplementation deps.coroutines.test
     // Retrofit
     implementation deps.retrofit.core
     implementation deps.retrofit.converter
@@ -91,6 +97,7 @@ dependencies {
     // Mockito
     implementation deps.mockito.core
     implementation deps.mockito.mockito_kotlin
+    testImplementation deps.mockito.inline
     // Lifecycle
     implementation deps.lifecycle.view_model
     implementation deps.lifecycle.live_data
@@ -105,7 +112,8 @@ dependencies {
     testImplementation deps.truth.core
     testImplementation deps.truth.ext
     // Mockk
-    testImplementation deps.mockk
+    testImplementation deps.mockk.test
+    androidTestImplementation deps.mockk.androidTest
     // Espresso
     androidTestImplementation deps.espresso
 }
