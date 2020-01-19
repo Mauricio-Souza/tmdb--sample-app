@@ -23,7 +23,7 @@ class ServerMiddleware(private val repository: ITMDbRepository) : INext {
             }
             is ViewAction.OnMovieDetailsActivityCreated -> {
                 runHttpCall(
-                    onExecute = { repository.getMovieDetails(action.movieId)},
+                    onExecute = { repository.getMovieDetails(action.movieId) },
                     onSuccess = { data -> newAction = ServerResponse.Success(data.toVO()) },
                     onFailure = { error -> newAction = ServerResponse.Failure(error.map()) }
                 )

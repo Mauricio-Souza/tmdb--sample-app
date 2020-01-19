@@ -13,10 +13,11 @@ data class MovieDetailsVO (
     val posterPath: String,
     val releaseDate: String,
     val revenue: Int,
-    val runtime: Int,
+    val runtime: String,
     val status: String,
     val tagline: String,
     val title: String,
-    val voteAverage: Double,
-    val voteCount: Int
+    val voteAverage: String,
+    val voteCount: Int,
+    val radius: Int = 10
 )

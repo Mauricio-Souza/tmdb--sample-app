@@ -5,20 +5,127 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/movieDetailsPoster"
-        android:transitionName="@string/movie_poster_transition"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/recycler_item_movie_poster_height"
+    <LinearLayout
+        android:id="@+id/runtimeAndReleaseDateGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:padding="@dimen/padding_3"
+        android:background="@drawable/border_gray"
+        android:layout_marginTop="@dimen/margin_7"
+        tools:visibility="visible"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/ivPoster"
+        app:layout_constraintRight_toRightOf="@id/ivPoster"
+        app:layout_constraintBottom_toTopOf="@id/ivPoster">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvRuntime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:fontFamily="@font/ibmplexsans_semibold"
+            android:textColor="@color/mediumGray"
+            android:textSize="@dimen/text_14"
+            tools:text="2h 22m" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvReleaseDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:fontFamily="@font/ibmplexsans_semibold"
+            android:textSize="@dimen/text_14"
+            android:textColor="@color/mediumGray"
+            tools:text="05 Oct 2017"/>
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/movieDetailsGroup"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginRight="@dimen/margin_10"
+        app:layout_constraintTop_toTopOf="@id/ivPoster"
+        app:layout_constraintLeft_toRightOf="@id/ivPoster"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/ivPoster">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            app:srcCompat="@drawable/ic_star"
+            app:layout_constraintVertical_bias="0.7"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintTop_toTopOf="@id/tvRate"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/tvRate"
+            app:layout_constraintBottom_toBottomOf="@id/tvRate"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ibmplexsans_bold"
+            android:textSize="@dimen/text_24"
+            android:textColor="@color/colorPrimary"
+            tools:text="8.1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/ivPoster"
+        android:transitionName="@string/movie_poster_transition"
+        android:layout_width="@dimen/width_200"
+        android:layout_height="@dimen/height_300"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="@dimen/margin_5"
+        android:layout_marginLeft="@dimen/margin_10"
+        app:layout_constraintTop_toBottomOf="@id/runtimeAndReleaseDateGroup"
+        app:layout_constraintLeft_toLeftOf="parent"
         tools:src="@drawable/avengers_poster"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvSynopsisText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ibmplexsans_semibold"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_20"
+        android:text="@string/synopsis_text"
+        android:layout_marginTop="@dimen/margin_10"
+        app:layout_constraintTop_toBottomOf="@id/ivPoster"
+        app:layout_constraintLeft_toLeftOf="@id/ivPoster"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvSynopsis"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/ibmplexsans_regular"
+        android:textSize="@dimen/text_16"
+        android:textColor="@color/mediumGray"
+        android:layout_marginTop="@dimen/margin_5"
+        app:layout_constraintTop_toBottomOf="@id/tvSynopsisText"
+        app:layout_constraintLeft_toLeftOf="@id/ivPoster"
+        app:layout_constraintRight_toRightOf="@id/movieDetailsGroup"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
+        style="?android:attr/progressBarStyle"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/radial_loading"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

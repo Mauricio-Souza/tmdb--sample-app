@@ -38,8 +38,4 @@ class TMBbApplication : Application(), KodeinAware {
         }
         bind() from provider { StoreFactory(instance()) }
     }
-
-    override fun onCreate() {
-        super.onCreate()
-    }
 }

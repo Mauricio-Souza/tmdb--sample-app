@@ -25,8 +25,7 @@ class LoadingObserver(
 ) : Observer<State> {
     override fun onChanged(state: State?) {
         state?.let {
-            if (it.data is Loading) consumer(true)
-            else consumer(false)
+            consumer(it.data is Loading)
         }
     }
 

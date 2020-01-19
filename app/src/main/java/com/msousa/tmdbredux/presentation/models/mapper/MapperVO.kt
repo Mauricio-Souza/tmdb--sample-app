@@ -3,6 +3,7 @@ package com.msousa.tmdbredux.presentation.models.mapper
 import com.msousa.tmdbredux.BuildConfig
 import com.msousa.tmdbredux.data.remote.exceptions.TMDbException
 import com.msousa.tmdbredux.data.remote.responses.Movie
+import com.msousa.tmdbredux.extensions.formatDate
 import com.msousa.tmdbredux.redux.middlewares.mappers.models.GenreMapper
 import com.msousa.tmdbredux.redux.middlewares.mappers.models.MovieDetailsMapper
 import com.msousa.tmdbredux.redux.middlewares.mappers.models.MovieListMapper
@@ -40,13 +41,13 @@ fun MovieDetailsMapper.toVO() = MovieDetailsVO(
     overview = overview,
     popularity = popularity,
     posterPath = "${BuildConfig.BASE_IMAGE_URL}${posterPath}",
-    releaseDate = releaseDate,
+    releaseDate = releaseDate.formatDate(),
     revenue = revenue,
-    runtime = runtime,
+    runtime = "$runtime min",
     status = status,
     tagline = tagline,
     title = title,
-    voteAverage = voteAverage,
+    voteAverage = voteAverage.toString(),
     voteCount = voteCount
 )
 

@@ -3,10 +3,11 @@ package com.msousa.tmdbredux.presentation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import com.msousa.tmdbredux.LayoutResource
 import com.msousa.tmdbredux.ResourceId
 import com.msousa.tmdbredux.StringResource
-import com.msousa.tmdbredux.extensions.loadImageFromUrl
+import com.msousa.tmdbredux.extensions.loadImageUrlWithCornerRadius
 import com.msousa.tmdbredux.presentation.models.observer.StateObserver
 import com.msousa.tmdbredux.presentation.models.viewObjects.MovieDetailsVO
 import com.msousa.tmdbredux.redux.actions.ViewAction.OnMovieDetailsActivityCreated
@@ -29,9 +30,14 @@ class MovieDetailsActivity : BaseActivity() {
 
     private val movieDetailsObserver = StateObserver<MovieDetailsVO> { movie ->
         movie?.run {
-            movieDetailsPoster?.loadImageFromUrl(posterPath)
+            runtimeAndReleaseDateGroup?.visibility = View.VISIBLE
             showActionBarWithTitle(originalTitle)
             showActionBarWithBackButton()
+            ivPoster?.loadImageUrlWithCornerRadius(posterPath, radius)
+            tvRuntime?.text = runtime
+            tvReleaseDate?.text = releaseDate
+            tvRate?.text = voteAverage
+            tvSynopsis?.text = overview
         }
     }
 

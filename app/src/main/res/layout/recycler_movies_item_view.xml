@@ -10,7 +10,7 @@
         android:id="@+id/cardMoviePoster"
         android:layout_width="@dimen/width_0"
         android:layout_height="@dimen/recycler_item_movie_poster_height"
-        android:layout_margin="@dimen/margin_10"
+        android:layout_margin="@dimen/margin_7"
         app:cardCornerRadius="@dimen/radius_6"
         app:cardElevation="@dimen/elevation_4"
         android:elevation="@dimen/elevation_4"
@@ -22,7 +22,6 @@
         <ImageView
             android:id="@+id/moviePoster"
             android:transitionName="@string/movie_poster_transition"
-            android:layout_margin="@dimen/margin_5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:src="@drawable/avengers_poster"
@@ -48,8 +47,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/star"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/width_20"
+        android:layout_height="@dimen/height_20"
         app:srcCompat="@drawable/ic_star"
         app:layout_constraintTop_toBottomOf="@+id/movieName"
         app:layout_constraintLeft_toLeftOf="@id/movieName"/>
@@ -60,7 +59,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/ibmplexsans_bold"
         android:textColor="@color/yellow"
-        android:textSize="@dimen/text_17"
+        android:textSize="@dimen/text_16"
         tools:text="7.2"
         android:gravity="center"
         android:layout_marginLeft="@dimen/margin_5"
