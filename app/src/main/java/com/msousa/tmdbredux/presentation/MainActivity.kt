@@ -3,20 +3,27 @@ package com.msousa.tmdbredux.presentation
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.msousa.tmdbredux.LayoutResource
 import com.msousa.tmdbredux.ResourceId
-import com.msousa.tmdbredux.presentation.models.observer.LoadingObserver
-import com.msousa.tmdbredux.redux.actions.ViewAction.*
+import com.msousa.tmdbredux.StringResource
 import com.msousa.tmdbredux.presentation.models.observer.StateObserver
 import com.msousa.tmdbredux.presentation.models.viewObjects.ErrorMessageVO
 import com.msousa.tmdbredux.presentation.models.viewObjects.MoviesVO
+import com.msousa.tmdbredux.redux.actions.ViewAction.OnListItemClicked
+import com.msousa.tmdbredux.redux.actions.ViewAction.OnMainActivityCreated
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
 
     private lateinit var moviesAdapter: MoviesAdapter
+    private lateinit var imageView: ImageView
+    private var itemPosition: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +32,7 @@ class MainActivity : BaseActivity() {
 
         store.dispatcher(OnMainActivityCreated)
 
-        store.stateLiveData.observe(this, loadingObserverWithBehavior(ResourceId.progressBar))
+        store.stateLiveData.observe(this, loadingObserverBehavior(ResourceId.progressBar))
 
         store.stateLiveData.observe(this, moviesObserver)
 
@@ -36,7 +43,8 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initRecyclerView() {
-        moviesAdapter = MoviesAdapter { id ->
+        moviesAdapter = MoviesAdapter { id, view ->
+            imageView = view
             store.dispatcher(OnListItemClicked(this, id))
         }
         recyclerMovies.layoutManager = GridLayoutManager(this, 2, RecyclerView.VERTICAL, false)
@@ -51,7 +59,13 @@ class MainActivity : BaseActivity() {
     }
 
     private val navigationObserver = StateObserver<Intent> { intent ->
-        startActivity(intent)
+        val imgViewPair = Pair.create<View, String>(
+            imageView,
+            ViewCompat.getTransitionName(imageView)
+        )
+        val options =
+            ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity, imgViewPair)
+        startActivity(intent, options.toBundle())
     }
 
     private val errorObserver = StateObserver<ErrorMessageVO> { error ->

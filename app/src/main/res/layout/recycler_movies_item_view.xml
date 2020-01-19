@@ -21,6 +21,7 @@
 
         <ImageView
             android:id="@+id/moviePoster"
+            android:transitionName="@string/movie_poster_transition"
             android:layout_margin="@dimen/margin_5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -17,10 +17,10 @@ sealed class ServerResponse : Action() {
 
 sealed class ViewAction : Action() {
 
-    object OnMainActivityCreated : ViewAction()
     data class OnListItemClicked(val context: Context, val id: String) : NavigationRouter, ViewAction() {
         override fun invoke() = MovieDetailsActivity.getIntent(context, id)
     }
+    object OnMainActivityCreated : ViewAction()
     data class OnMovieDetailsActivityCreated(val movieId: String) : ViewAction()
 }
 

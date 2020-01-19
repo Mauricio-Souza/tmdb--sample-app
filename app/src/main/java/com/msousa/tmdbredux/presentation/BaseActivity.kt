@@ -12,7 +12,7 @@ import com.msousa.tmdbredux.StringResource
 import com.msousa.tmdbredux.presentation.models.observer.LoadingObserver
 import com.msousa.tmdbredux.redux.store.IStore
 import com.msousa.tmdbredux.redux.store.Store
-import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_movie_details.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.erased.instance
@@ -43,7 +43,14 @@ abstract class BaseActivity : AppCompatActivity(), LifecycleOwner, KodeinAware {
         }
     }
 
-    protected fun loadingObserverWithBehavior(viewId: Int) = LoadingObserver { isLoading ->
+    protected fun showActionBarWithBackButton() {
+        supportActionBar?.apply {
+            show()
+            setDisplayHomeAsUpEnabled(true)
+        }
+    }
+
+    protected fun loadingObserverBehavior(viewId: Int) = LoadingObserver { isLoading ->
         check(viewId != 0) { getString(StringResource.INVALID_RESOURCE_ID) }
         findViewById<ProgressBar>(viewId)?.visibility = if (isLoading) View.VISIBLE else View.GONE
     }

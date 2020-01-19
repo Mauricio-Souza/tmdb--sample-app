@@ -14,6 +14,11 @@
     <!-- End Network error message -->
     
     <string name="movies_text">Filmes</string>
+
+    <!-- Exceptions messages -->
     <string name="MISSING_ARGUMENT_REQUIRED_ERROR">Missing argument required</string>
     <string name="INVALID_RESOURCE_ID">resource id not found</string>
+
+    <!-- transitions name -->
+    <string name="movie_poster_transition">movie_poster</string>
 </resources>
