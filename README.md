@@ -2,6 +2,7 @@
 sample android app using redux architecture to show movies and movies details from TMDb API
 
 <h5>Some libraries and technologies used</h5>
+<i>Architecture Components</i><br>
 <i>Redux</i><br>
 <i>Kodein</i><br>
 <i>Room</i><br>
