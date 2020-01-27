@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <item name="vote_average_text_size" format="float" type="dimen">0.7</item>
     <dimen name="recycler_item_movie_poster_height">230dp</dimen>
     <dimen name="padding_3">3dp</dimen>
     <dimen name="padding_2">2dp</dimen>
@@ -16,7 +17,9 @@
     <dimen name="height_25">25dp</dimen>
     <dimen name="height_30">30dp</dimen>
     <dimen name="height_300">300dp</dimen>
+    <dimen name="text_10">10sp</dimen>
     <dimen name="text_12">12sp</dimen>
+    <dimen name="text_13">13sp</dimen>
     <dimen name="text_14">14sp</dimen>
     <dimen name="text_15">15sp</dimen>
     <dimen name="text_16">16sp</dimen>

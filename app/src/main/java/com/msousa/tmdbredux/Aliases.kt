@@ -15,6 +15,10 @@ typealias ImageResource = R.drawable
 
 typealias LayoutResource = R.layout
 
+typealias ColorResource = R.color
+
+typealias DimenResource = R.dimen
+
 typealias StateLiveData = LiveData<State>
 
 typealias MutableStateLiveData = MutableLiveData<State>
