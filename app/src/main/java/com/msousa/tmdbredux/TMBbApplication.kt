@@ -36,6 +36,6 @@ class TMBbApplication : Application(), KodeinAware {
                 )
             )
         }
-        bind() from provider { StoreFactory(instance()) }
+        bind() from singleton { StoreFactory(instance()) }
     }
 }
