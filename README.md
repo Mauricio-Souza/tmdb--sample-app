@@ -5,7 +5,7 @@ Redux<br>
 Kodein<br>
 Room<br>
 Glide<br>
-Coroutines<br>
+<i>Coroutines</i><br>
 <i>Coroutines Flow</i><br>
 <i>Retrofit</i><br>
 <i>OkHttp</i>
