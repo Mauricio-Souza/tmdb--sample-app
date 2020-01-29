@@ -23,7 +23,6 @@ class MainActivity : BaseActivity() {
 
     private lateinit var moviesAdapter: MoviesAdapter
     private lateinit var imageView: ImageView
-    private var itemPosition: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

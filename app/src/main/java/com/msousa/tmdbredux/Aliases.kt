@@ -11,7 +11,7 @@ typealias StringResource = R.string
 
 typealias ResourceId = R.id
 
-typealias ImageResource = R.drawable
+typealias DrawableResource = R.drawable
 
 typealias LayoutResource = R.layout
 

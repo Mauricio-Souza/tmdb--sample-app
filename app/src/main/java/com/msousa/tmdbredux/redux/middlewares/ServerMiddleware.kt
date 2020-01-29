@@ -1,13 +1,9 @@
 package com.msousa.tmdbredux.redux.middlewares
 
-import com.msousa.tmdbredux.redux.actions.Action
-import com.msousa.tmdbredux.redux.actions.ViewAction
-import com.msousa.tmdbredux.redux.actions.ServerResponse
 import com.msousa.tmdbredux.data.remote.ITMDbRepository
 import com.msousa.tmdbredux.data.remote.runHttpCall
 import com.msousa.tmdbredux.presentation.models.mapper.*
-import com.msousa.tmdbredux.redux.state.State
-import com.msousa.tmdbredux.redux.store.IStore
+import com.msousa.tmdbredux.redux.actions.*
 
 class ServerMiddleware(private val repository: ITMDbRepository) : INext {
 
@@ -28,7 +24,9 @@ class ServerMiddleware(private val repository: ITMDbRepository) : INext {
                     onFailure = { error -> newAction = ServerResponse.Failure(error.map()) }
                 )
             }
-            else -> { }
+            is NoInternetConnection -> {
+                newAction = Database.Entity<Any>(operation = Database.Operation.DELETE)
+            }
         }
         return newAction
     }

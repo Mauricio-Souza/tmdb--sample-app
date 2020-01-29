@@ -4,19 +4,15 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.util.TypedValue
-import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
-import com.msousa.tmdbredux.ImageResource
-import com.msousa.tmdbredux.R
+import com.msousa.tmdbredux.DrawableResource
 import com.msousa.tmdbredux.StringResource
 import java.text.SimpleDateFormat
-import java.util.*
 
 fun ConnectivityManager.noInternetConnection() = activeNetworkInfo?.isConnectedOrConnecting != true
 
@@ -33,7 +29,7 @@ fun ImageView.loadImageUrlWithCornerRadius(url: String, radius: Int) {
             setStyle(CircularProgressDrawable.DEFAULT)
             start()
         })
-        .error(ImageResource.avengers_poster)
+        .error(DrawableResource.avengers_poster)
         .into(this)
 }
 

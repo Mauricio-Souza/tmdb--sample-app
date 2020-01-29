@@ -1,9 +1,8 @@
 package com.msousa.tmdbredux.data.local
 
 interface ITMDbDatabaseRepository {
-
-    fun <T> save(data: T)
-    fun <T> update(data: T)
-    fun <T> delete(data : T)
-    fun <T> select(data: T)
+    fun <T> insert(param: T)
+    fun <T> update(param: T)
+    fun <T> delete(param : T)
+    fun <T> select(param: T)
 }
