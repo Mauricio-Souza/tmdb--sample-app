@@ -2,25 +2,21 @@ package com.msousa.tmdbredux.presentation
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
-import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.core.text.toSpannable
 import com.msousa.tmdbredux.*
 import com.msousa.tmdbredux.extensions.getColorCompat
-import com.msousa.tmdbredux.extensions.getDimens
 import com.msousa.tmdbredux.extensions.getResourceValue
 import com.msousa.tmdbredux.extensions.loadImageUrlWithCornerRadius
+import com.msousa.tmdbredux.presentation.models.observer.LoadingObserver
 import com.msousa.tmdbredux.presentation.models.observer.StateObserver
 import com.msousa.tmdbredux.presentation.models.viewObjects.MovieDetailsVO
 import com.msousa.tmdbredux.redux.actions.ViewAction.OnMovieDetailsActivityCreated
-import com.nhaarman.mockitokotlin2.inOrder
 import kotlinx.android.synthetic.main.activity_movie_details.*
 
 class MovieDetailsActivity : BaseActivity() {
@@ -35,7 +31,11 @@ class MovieDetailsActivity : BaseActivity() {
 
         store.stateLiveData.observe(this, movieDetailsObserver)
 
-        store.stateLiveData.observe(this, loadingObserverBehavior(ResourceId.progressBar))
+        store.stateLiveData.observe(this, loadingObserverBehavior)
+    }
+
+    private val loadingObserverBehavior = LoadingObserver { visibility ->
+        progressBar?.visibility = visibility
     }
 
     private val movieDetailsObserver = StateObserver<MovieDetailsVO> { movie ->

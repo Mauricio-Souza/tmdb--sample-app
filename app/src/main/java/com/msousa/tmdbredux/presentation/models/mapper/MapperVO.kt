@@ -11,7 +11,7 @@ import com.msousa.tmdbredux.presentation.models.viewObjects.*
 
 fun MovieListMapper.toVO() = MoviesVO(
     name = name,
-    items = items.map()
+    items = items.toVO()
 )
 
 fun List<GenreMapper>.mapToVO() = map {
@@ -21,7 +21,7 @@ fun List<GenreMapper>.mapToVO() = map {
     )
 }
 
-fun List<Movie>.map() = map {
+fun List<Movie>.toVO() = map {
     MovieVO (
         id = it.id.toString(),
         posterPath = "${BuildConfig.BASE_IMAGE_URL}${it.posterPath}",
@@ -51,6 +51,6 @@ fun MovieDetailsMapper.toVO() = MovieDetailsVO(
     voteCount = voteCount
 )
 
-fun TMDbException.map() = ErrorMessageVO(
+fun TMDbException.toVO() = ErrorMessageVO(
     message = userMessage
 )

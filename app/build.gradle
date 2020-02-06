@@ -36,6 +36,12 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    android.testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+        }
+    }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -73,6 +79,8 @@ dependencies {
     implementation deps.kotlin.jdk8
     implementation deps.kotlin.test
     implementation deps.kotlin.reflect
+    // Kotlin Test
+    testImplementation deps.kotlin_test
     // Timber
     implementation deps.timber
     // Glide
@@ -108,9 +116,6 @@ dependencies {
     // JUnit
     testImplementation deps.junit.core
     androidTestImplementation deps.junit.extensions
-    // Truth
-    testImplementation deps.truth.core
-    testImplementation deps.truth.ext
     // Mockk
     testImplementation deps.mockk.test
     androidTestImplementation deps.mockk.androidTest

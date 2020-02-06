@@ -24,14 +24,8 @@ sealed class ViewAction : Action() {
     data class OnMovieDetailsActivityCreated(val movieId: String) : ViewAction()
 }
 
-sealed class NoInternetConnection : Action()
+sealed class DatabaseOperation : Action() {
 
-sealed class Database : Action() {
-
-   enum class Operation { SELECT, INSERT, DELETE, UPDATE }
-
-    data class Entity<T>(
-        val param: T? = null,
-        val operation: Operation
-    ) : Database()
+    data class Select<P>(val param: P? = null) : DatabaseOperation()
+    class Insert<P>(vararg val param: P) : DatabaseOperation()
 }

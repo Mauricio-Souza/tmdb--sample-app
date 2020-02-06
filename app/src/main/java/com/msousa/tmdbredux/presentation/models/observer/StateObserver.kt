@@ -1,5 +1,6 @@
 package com.msousa.tmdbredux.presentation.models.observer
 
+import android.view.View
 import androidx.lifecycle.Observer
 import com.msousa.tmdbredux.redux.actions.ServerResponse.Loading
 import com.msousa.tmdbredux.redux.state.State
@@ -21,11 +22,12 @@ class StateObserver<T>(
 }
 
 class LoadingObserver(
-    private val consumer: (Boolean) -> Unit
+    private val consumer: (Int) -> Unit
 ) : Observer<State> {
     override fun onChanged(state: State?) {
         state?.let {
-            consumer(it.data is Loading)
+            if (it.data is Loading) consumer(View.VISIBLE)
+            else consumer(View.GONE)
         }
     }
 

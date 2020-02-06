@@ -49,9 +49,4 @@ abstract class BaseActivity : AppCompatActivity(), LifecycleOwner, KodeinAware {
             setDisplayHomeAsUpEnabled(true)
         }
     }
-
-    protected fun loadingObserverBehavior(viewId: Int) = LoadingObserver { isLoading ->
-        check(viewId != 0) { getString(StringResource.INVALID_RESOURCE_ID) }
-        findViewById<ProgressBar>(viewId)?.visibility = if (isLoading) View.VISIBLE else View.GONE
-    }
 }

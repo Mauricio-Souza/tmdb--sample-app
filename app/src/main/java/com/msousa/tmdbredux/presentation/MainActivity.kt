@@ -10,8 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.msousa.tmdbredux.LayoutResource
-import com.msousa.tmdbredux.ResourceId
-import com.msousa.tmdbredux.StringResource
+import com.msousa.tmdbredux.presentation.models.observer.LoadingObserver
 import com.msousa.tmdbredux.presentation.models.observer.StateObserver
 import com.msousa.tmdbredux.presentation.models.viewObjects.ErrorMessageVO
 import com.msousa.tmdbredux.presentation.models.viewObjects.MoviesVO
@@ -31,7 +30,7 @@ class MainActivity : BaseActivity() {
 
         store.dispatcher(OnMainActivityCreated)
 
-        store.stateLiveData.observe(this, loadingObserverBehavior(ResourceId.progressBar))
+        store.stateLiveData.observe(this, loadingObserverBehavior)
 
         store.stateLiveData.observe(this, moviesObserver)
 
@@ -48,6 +47,10 @@ class MainActivity : BaseActivity() {
         }
         recyclerMovies.layoutManager = GridLayoutManager(this, 2, RecyclerView.VERTICAL, false)
         recyclerMovies.adapter = moviesAdapter
+    }
+
+    private val loadingObserverBehavior = LoadingObserver { visibility ->
+        progressBar?.visibility = visibility
     }
 
     private val moviesObserver = StateObserver<MoviesVO> { movies ->

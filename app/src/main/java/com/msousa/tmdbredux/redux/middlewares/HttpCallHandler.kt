@@ -1,4 +1,4 @@
-package com.msousa.tmdbredux.data.remote
+package com.msousa.tmdbredux.redux.middlewares
 
 import com.msousa.tmdbredux.data.remote.exceptions.TMDbException
 import com.msousa.tmdbredux.data.remote.exceptions.TMDbNoInternetException
