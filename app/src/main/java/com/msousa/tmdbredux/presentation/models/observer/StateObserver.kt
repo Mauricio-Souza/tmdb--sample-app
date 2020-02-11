@@ -2,7 +2,7 @@ package com.msousa.tmdbredux.presentation.models.observer
 
 import android.view.View
 import androidx.lifecycle.Observer
-import com.msousa.tmdbredux.redux.actions.ServerResponse.Loading
+import com.msousa.tmdbredux.redux.actions.Result.Loading
 import com.msousa.tmdbredux.redux.state.State
 import timber.log.Timber
 

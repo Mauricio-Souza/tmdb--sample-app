@@ -2,7 +2,7 @@ package com.msousa.tmdbredux
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.msousa.tmdbredux.presentation.models.observer.StateObserver
-import com.msousa.tmdbredux.redux.actions.ServerResponse
+import com.msousa.tmdbredux.redux.actions.Result
 import com.msousa.tmdbredux.redux.actions.ViewAction
 import com.msousa.tmdbredux.redux.state.State
 import com.msousa.tmdbredux.redux.store.IStore
@@ -49,7 +49,7 @@ class StoreUnitTest {
     @Test
     fun `should change app state to loading status`() {
         store.dispatcher(ViewAction.OnMainActivityCreated)
-        verify(stateObserver, times(1)).onChanged(State(data = ServerResponse.Loading))
-        assertEquals(store.stateLiveData.value, State(data = ServerResponse.Loading))
+        verify(stateObserver, times(1)).onChanged(State(data = Result.Loading))
+        assertEquals(store.stateLiveData.value, State(data = Result.Loading))
     }
 }

@@ -1,10 +1,10 @@
 package com.msousa.tmdbredux
 
 import android.app.Application
-import android.content.Context
-import android.net.ConnectivityManager
-import com.msousa.tmdbredux.data.local.ITMDbDatabaseRepository
-import com.msousa.tmdbredux.data.local.TMDbDatabaseRepository
+import com.msousa.tmdbredux.data.local.ITMDbDatabaseDataSource
+import com.msousa.tmdbredux.data.local.TMDbDatabaseDataSource
+import com.msousa.tmdbredux.data.local.TMDbDatabaseProvider
+import com.msousa.tmdbredux.data.local.dao.IMoviesDao
 import com.msousa.tmdbredux.data.remote.ITMDbRepository
 import com.msousa.tmdbredux.data.remote.TMDbRepository
 import com.msousa.tmdbredux.redux.middlewares.*
@@ -14,7 +14,6 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
-import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
 
 class TMBbApplication : Application(), KodeinAware {
@@ -22,11 +21,16 @@ class TMBbApplication : Application(), KodeinAware {
     override val kodein = Kodein.lazy {
         import(androidXModule(this@TMBbApplication))
 
+        bind() from singleton { TMDbDatabaseProvider(instance()) }
+        bind() from singleton { instance<TMDbDatabaseProvider>().moviesDao() }
+        bind() from singleton { instance<TMDbDatabaseProvider>().moviesDetailsDao() }
         bind<ITMDbRepository>() with singleton { TMDbRepository() }
-        bind<ITMDbDatabaseRepository>() with singleton { TMDbDatabaseRepository() }
         bind() from singleton { ServerMiddleware(instance()) }
         bind() from singleton { DatabaseMiddleware(instance()) }
         bind() from singleton { EndOfChain() }
+        bind<ITMDbDatabaseDataSource>() with singleton {
+            TMDbDatabaseDataSource(instance(), instance())
+        }
         bind<IMiddleware>() with singleton {
             Middleware(
                 listOf(

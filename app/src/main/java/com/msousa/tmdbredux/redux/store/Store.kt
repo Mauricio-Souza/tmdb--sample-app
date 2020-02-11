@@ -3,10 +3,10 @@ package com.msousa.tmdbredux.redux.store
 import com.msousa.tmdbredux.MutableStateLiveData
 import com.msousa.tmdbredux.StateLiveData
 import com.msousa.tmdbredux.redux.actions.*
-import com.msousa.tmdbredux.redux.actions.ServerResponse.Loading
+import com.msousa.tmdbredux.redux.actions.Result.Loading
 import com.msousa.tmdbredux.redux.middlewares.IMiddleware
 import com.msousa.tmdbredux.redux.reducer.NavigationReducer
-import com.msousa.tmdbredux.redux.reducer.ServerResponseReducer
+import com.msousa.tmdbredux.redux.reducer.ResultReducer
 import com.msousa.tmdbredux.redux.state.State
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -29,7 +29,6 @@ class Store(
         uiScope.launch {
             var newAction = action
             withContext(Dispatchers.IO) {
-                _stateLiveData.postValue(currentState.copy(data = Loading))
                 newAction = middleware(action)
             }
             currentState = reducer(newAction)
@@ -39,6 +38,7 @@ class Store(
 
     private suspend fun middleware(action: Action): Action {
         var newAction = action
+        _stateLiveData.postValue(currentState.copy(data = Loading))
         mainMiddleware.apply(action).collect { action ->
             newAction = action
         }
@@ -48,8 +48,8 @@ class Store(
     private suspend fun reducer(action: Action): State {
         var newState = currentState
         when (action) {
-            is ServerResponse -> {
-                ServerResponseReducer.apply(currentState, action).collect { state ->
+            is Result -> {
+                ResultReducer.apply(currentState, action).collect { state ->
                     newState = state
                 }
             }

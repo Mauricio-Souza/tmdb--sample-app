@@ -113,6 +113,12 @@ dependencies {
     implementation deps.lifecycle.extensions
     implementation deps.lifecycle.java8
     testImplementation deps.lifecycle.livedataTesting
+    // Room
+    implementation deps.room.coroutines
+    implementation deps.room.runtime
+    implementation deps.room.extensions
+    kapt deps.room.compiler
+    testImplementation deps.room.forTesting
     // JUnit
     testImplementation deps.junit.core
     androidTestImplementation deps.junit.extensions

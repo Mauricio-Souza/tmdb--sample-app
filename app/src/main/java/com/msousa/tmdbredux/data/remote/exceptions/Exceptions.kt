@@ -17,3 +17,5 @@ class TMDbNoContentException(override val userMessage: Int = StringResource.NO_C
 class TMDbUnknownErrorException(override val userMessage: Int = StringResource.UNKNOWN_SERVER_ERROR) : TMDbException()
 
 class TMDbNoInternetException(override val userMessage: Int = StringResource.NO_INTERNET_CONNECTION_ERROR) : TMDbException()
+
+class TMDbNoSuchDataFound(override val userMessage: Int = StringResource.NO_SUCH_DATA_FOUND_ERROR) : TMDbException()

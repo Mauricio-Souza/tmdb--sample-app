@@ -2,6 +2,7 @@ package com.msousa.tmdbredux.redux.middlewares
 
 import com.msousa.tmdbredux.data.remote.exceptions.TMDbException
 import com.msousa.tmdbredux.data.remote.exceptions.TMDbNoInternetException
+import com.msousa.tmdbredux.data.remote.exceptions.TMDbNoSuchDataFound
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
@@ -21,4 +22,14 @@ suspend inline fun <T> runHttpCall(
         is UnknownHostException -> onFailure(TMDbNoInternetException())
         else -> Timber.e(e)
     }
+}
+
+suspend inline fun <T> runDatabaseOperation(
+    onExecute: () -> T,
+    crossinline onSuccess: (T) -> Unit,
+    onFailure: (TMDbException) -> Unit
+) = try {
+    onExecute().run { onSuccess(this) }
+} catch (e: Exception) {
+    onFailure(TMDbNoSuchDataFound())
 }

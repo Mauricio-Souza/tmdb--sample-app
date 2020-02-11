@@ -22,6 +22,7 @@ ext.versions = [
         timber : '4.7.1',
         glide : '4.10.0',
         lifecycle_version : "2.2.0-alpha01",
+        room_db : '2.2.2',
         compileSdkVersion : 29,
         targetSdkVersion : 29,
         minSdkVersion : 21,
@@ -82,7 +83,14 @@ ext.deps = [
                 core : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines_core}",
                 android : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines_core}"
         ],
-        'lifecycle' : [
+        'room'       : [
+                'coroutines' : "androidx.room:room-ktx:${versions.room_db}",
+                'runtime' : "androidx.room:room-runtime:${versions.room_db}",
+                'compiler' : "androidx.room:room-compiler:${versions.room_db}",
+                'extensions' : "androidx.room:room-ktx:${versions.room_db}",
+                'forTesting' : "androidx.room:room-testing:${versions.room_db}"
+        ],
+        'lifecycle'  : [
                 'view_model': "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle_version}",
                 'live_data' : "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycle_version}",
                 'runtime'   : "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycle_version}",

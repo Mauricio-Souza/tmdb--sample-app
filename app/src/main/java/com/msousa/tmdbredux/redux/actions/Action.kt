@@ -2,16 +2,18 @@ package com.msousa.tmdbredux.redux.actions
 
 import android.content.Context
 import com.msousa.tmdbredux.NavigationRouter
+import com.msousa.tmdbredux.data.local.entities.MovieDetailsEntity
+import com.msousa.tmdbredux.data.local.entities.MoviesEntity
 import com.msousa.tmdbredux.presentation.MovieDetailsActivity
 import com.msousa.tmdbredux.presentation.models.viewObjects.ErrorMessageVO
 
 sealed class Action
 
-sealed class ServerResponse : Action() {
+sealed class Result : Action() {
 
-    data class Success<out R>(val data: R) : ServerResponse()
-    data class Failure(val error: ErrorMessageVO) : ServerResponse()
-    object Loading : ServerResponse()
+    data class Success<out R>(val data: R) : Result()
+    data class Failure(val error: ErrorMessageVO) : Result()
+    object Loading : Result()
 }
 
 sealed class ViewAction : Action() {
@@ -24,8 +26,10 @@ sealed class ViewAction : Action() {
     data class OnMovieDetailsActivityCreated(val movieId: String) : ViewAction()
 }
 
-sealed class DatabaseOperation : Action() {
+sealed class FromDatabase : Action() {
 
-    data class Select<P>(val param: P? = null) : DatabaseOperation()
-    class Insert<P>(vararg val param: P) : DatabaseOperation()
+    object SelectAllMovies : FromDatabase()
+    data class InsertMovies(val movies: Array<out MoviesEntity>) : FromDatabase()
+    data class SelectMovieDetails(val movieId: Long) : FromDatabase()
+    data class InsertMovieDetails(val movie: MovieDetailsEntity) : FromDatabase()
 }
