@@ -43,3 +43,4 @@ fun MovieDetailsResponse.toMapper() = MovieDetailsMapper(
     voteAverage = voteAverage,
     voteCount = voteCount
 )
+

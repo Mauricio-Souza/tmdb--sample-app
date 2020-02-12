@@ -24,9 +24,9 @@ suspend inline fun <T> runHttpCall(
     }
 }
 
-suspend inline fun <T> runDatabaseOperation(
+inline fun <T> runDatabaseOperation(
     onExecute: () -> T,
-    crossinline onSuccess: (T) -> Unit,
+    onSuccess: (T) -> Unit,
     onFailure: (TMDbException) -> Unit
 ) = try {
     onExecute().run { onSuccess(this) }

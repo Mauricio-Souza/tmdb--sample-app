@@ -1,11 +1,8 @@
 package com.msousa.tmdbredux.presentation.models.viewObjects
 
 data class MovieDetailsVO (
-    val adult: Boolean,
-    val genres: List<GenreVO>,
     val homepage: String,
     val id: String,
-    val imdbId: String,
     val originalLanguage: String,
     val originalTitle: String,
     val overview: String,

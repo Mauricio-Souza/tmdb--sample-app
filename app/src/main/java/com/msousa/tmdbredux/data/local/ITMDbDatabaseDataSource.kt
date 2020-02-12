@@ -1,14 +1,12 @@
 package com.msousa.tmdbredux.data.local
 
-import com.msousa.tmdbredux.data.local.entities.IBaseMovieEntity
-import com.msousa.tmdbredux.data.local.entities.IMovieEntity
 import com.msousa.tmdbredux.data.local.entities.MovieDetailsEntity
 import com.msousa.tmdbredux.data.local.entities.MoviesEntity
 
 interface ITMDbDatabaseDataSource {
-    fun insertMovies(vararg movies: MoviesEntity)
-    fun selectAllMovies() : List<IBaseMovieEntity>
-    fun insertMovieDetails(movieDetails: MovieDetailsEntity)
-    fun selectMovieDetails(movieId: Long) : IMovieEntity
+    suspend fun insertMovies(vararg movies: MoviesEntity)
+    suspend fun selectAllMovies() : List<MoviesEntity>
+    suspend fun insertMovieDetails(movieDetailsEntity: MovieDetailsEntity)
+    suspend fun selectMovieDetails(movieId: Long) : MovieDetailsEntity
 
 }

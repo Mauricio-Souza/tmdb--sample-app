@@ -14,7 +14,13 @@ class ServerMiddleware(private val repository: ITMDbRepository) : INext {
                 runHttpCall(
                     onExecute = { repository.getMovies() },
                     onSuccess = { data -> newAction = Result.Success(data.toVO()) },
-                    onFailure = { error -> newAction = Result.Failure(error.toVO()) }
+                    onFailure = { error ->
+                        newAction = when (error) {
+                            is TMDbNoInternetException -> FromDatabase.SelectAllMovies
+                            else -> Result.Failure(error.toVO())
+
+                        }
+                    }
                 )
             }
             is ViewAction.OnMovieDetailsActivityCreated -> {

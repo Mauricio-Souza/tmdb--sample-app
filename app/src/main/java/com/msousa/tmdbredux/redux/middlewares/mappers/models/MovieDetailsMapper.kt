@@ -1,6 +1,5 @@
 package com.msousa.tmdbredux.redux.middlewares.mappers.models
 
-
 data class MovieDetailsMapper (
     val adult: Boolean,
     val genres: List<GenreMapper>,
