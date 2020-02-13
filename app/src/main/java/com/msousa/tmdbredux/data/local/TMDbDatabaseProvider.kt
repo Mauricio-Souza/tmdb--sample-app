@@ -4,12 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.msousa.tmdbredux.data.local.dao.IMovieDetailsDao
 import com.msousa.tmdbredux.data.local.dao.IMoviesDao
 import com.msousa.tmdbredux.data.local.entities.MovieDetailsEntity
 import com.msousa.tmdbredux.data.local.entities.MoviesEntity
+import com.msousa.tmdbredux.data.local.entities.converter.DataConverter
 
 @Database(entities = [MoviesEntity::class, MovieDetailsEntity::class], version = 1, exportSchema = false)
+@TypeConverters(DataConverter::class)
 abstract class TMDbDatabaseProvider : RoomDatabase() {
 
     abstract fun moviesDao(): IMoviesDao
@@ -28,6 +31,7 @@ abstract class TMDbDatabaseProvider : RoomDatabase() {
                 context.applicationContext,
                 TMDbDatabaseProvider::class.java,
                 DATABASE_NAME
-            ).build()
+            ).fallbackToDestructiveMigration()
+                .build()
     }
 }

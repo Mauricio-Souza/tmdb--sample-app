@@ -7,6 +7,7 @@
     <dimen name="margin_5">5dp</dimen>
     <dimen name="margin_7">7dp</dimen>
     <dimen name="margin_10">10dp</dimen>
+    <dimen name="margin_30">30dp</dimen>
     <dimen name="width_0">0dp</dimen>
     <dimen name="width_20">20dp</dimen>
     <dimen name="width_200">200dp</dimen>

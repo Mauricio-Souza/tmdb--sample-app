@@ -10,9 +10,9 @@ import com.msousa.tmdbredux.redux.middlewares.mappers.models.MovieListMapper
 import com.msousa.tmdbredux.presentation.models.viewObjects.*
 import com.msousa.tmdbredux.redux.middlewares.mappers.models.MovieDetailsMapper
 
-fun MovieListMapper.toVO() = MoviesVO(
+fun MoviesEntity.toVO() = MoviesVO(
     name = name,
-    items = items.toVO()
+    items = movies.toVO()
 )
 
 fun List<Movie>.toVO() = map {
@@ -24,32 +24,29 @@ fun List<Movie>.toVO() = map {
     )
 }
 
-fun MovieDetailsMapper.toVO() = MovieDetailsVO(
+fun MovieListMapper.toEntity() = MoviesEntity(
+    id = id.toLong(),
+    name = name,
+    movies = items
+)
+
+fun MovieDetailsMapper.toEntity() = MovieDetailsEntity(
     homepage = homepage,
-    id = id.toString(),
+    id = id.toLong(),
     originalLanguage = originalLanguage,
     originalTitle = originalTitle,
     overview = overview,
-    popularity = popularity,
+    popularity = popularity.toString(),
     posterPath = "${BuildConfig.BASE_IMAGE_URL}${posterPath}",
     releaseDate = releaseDate.formatDate(),
-    revenue = revenue,
+    revenue = revenue.toString(),
     runtime = "$runtime min",
     status = status,
     tagline = tagline,
     title = title,
     voteAverage = voteAverage.toString(),
-    voteCount = voteCount
+    voteCount = voteCount.toString()
 )
-
-fun List<MoviesEntity>.map() = map {
-    MovieVO (
-        id = it.id.toString(),
-        posterPath = "${BuildConfig.BASE_IMAGE_URL}${it.posterPath}",
-        title = it.title,
-        voteAverage = it.voteAverage
-    )
-}
 
 fun MovieDetailsEntity.toVO() = MovieDetailsVO(
     homepage = homepage,
@@ -58,8 +55,8 @@ fun MovieDetailsEntity.toVO() = MovieDetailsVO(
     originalTitle = originalTitle,
     overview = overview,
     popularity = popularity.toDouble(),
-    posterPath = "${BuildConfig.BASE_IMAGE_URL}${posterPath}",
-    releaseDate = releaseDate.formatDate(),
+    posterPath = posterPath,
+    releaseDate = releaseDate,
     revenue = revenue.toInt(),
     runtime = "$runtime min",
     status = status,

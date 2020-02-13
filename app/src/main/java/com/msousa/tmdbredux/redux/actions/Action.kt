@@ -29,7 +29,7 @@ sealed class ViewAction : Action() {
 sealed class FromDatabase : Action() {
 
     object SelectAllMovies : FromDatabase()
-    data class InsertMovies(val movies: Array<out MoviesEntity>) : FromDatabase()
+    data class InsertMovies(val movies: MoviesEntity) : FromDatabase()
     data class SelectMovieDetails(val movieId: Long) : FromDatabase()
     data class InsertMovieDetails(val movieEntity: MovieDetailsEntity) : FromDatabase()
 }

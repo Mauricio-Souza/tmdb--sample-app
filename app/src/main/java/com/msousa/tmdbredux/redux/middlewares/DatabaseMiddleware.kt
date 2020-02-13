@@ -2,7 +2,6 @@ package com.msousa.tmdbredux.redux.middlewares
 
 import com.msousa.tmdbredux.redux.actions.Action
 import com.msousa.tmdbredux.data.local.ITMDbDatabaseDataSource
-import com.msousa.tmdbredux.presentation.models.mapper.map
 import com.msousa.tmdbredux.presentation.models.mapper.toVO
 import com.msousa.tmdbredux.redux.actions.FromDatabase.SelectAllMovies
 import com.msousa.tmdbredux.redux.actions.FromDatabase.InsertMovieDetails
@@ -17,22 +16,22 @@ class DatabaseMiddleware(private val dataSource: ITMDbDatabaseDataSource) : INex
         when (action) {
             is InsertMovies -> {
                 runDatabaseOperation(
-                    onExecute = { dataSource.insertMovies(*action.movies) },
-                    onSuccess = { newAction = Result.Success(Unit) },
+                    onExecute = { dataSource.insertMovies(action.movies) },
+                    onSuccess = { newAction = Result.Success(action.movies.toVO()) },
                     onFailure = { error -> newAction = Result.Failure(error.toVO())}
                 )
             }
             is InsertMovieDetails -> {
                 runDatabaseOperation(
                     onExecute = { dataSource.insertMovieDetails(action.movieEntity) },
-                    onSuccess = { newAction = Result.Success(Unit) },
+                    onSuccess = { newAction = Result.Success(action.movieEntity.toVO()) },
                     onFailure = { error -> newAction = Result.Failure(error.toVO()) }
                 )
             }
             is SelectAllMovies -> {
                 runDatabaseOperation(
                     onExecute = { dataSource.selectAllMovies() },
-                    onSuccess = { entity -> newAction = Result.Success(entity.map()) },
+                    onSuccess = { entity -> newAction = Result.Success(entity.toVO()) },
                     onFailure = { error -> newAction = Result.Failure(error.toVO()) }
                 )
             }

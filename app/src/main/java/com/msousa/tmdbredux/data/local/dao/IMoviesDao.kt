@@ -10,8 +10,8 @@ import com.msousa.tmdbredux.data.local.entities.MoviesEntity
 interface IMoviesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg movies: MoviesEntity)
+    fun insertAll(movies: MoviesEntity)
 
     @Query("select * from movies")
-    fun readAllMovies() : List<MoviesEntity>
+    fun readAllMovies() : MoviesEntity
 }

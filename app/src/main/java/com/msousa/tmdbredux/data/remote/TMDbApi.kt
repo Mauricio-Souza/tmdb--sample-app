@@ -12,7 +12,7 @@ interface TMDbApi {
     @GET(value = "list/1")
     fun getMovies() : Deferred<Response<MovieListResponse>>
 
-    @GET(value = "movieEntity/{movie_id}")
+    @GET(value = "movie/{movie_id}")
     fun getMovieDetails(@Path(value = "movie_id") movieId: String) : Deferred<Response<MovieDetailsResponse>>
 
 }

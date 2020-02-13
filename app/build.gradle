@@ -83,6 +83,8 @@ dependencies {
     testImplementation deps.kotlin_test
     // Timber
     implementation deps.timber
+    // Gson
+    implementation deps.gson
     // Glide
     implementation deps.glide
     kapt deps.glide

@@ -10,8 +10,8 @@ class TMDbDatabaseDataSource(
     private val movieDetailsDao: IMovieDetailsDao
 ) : ITMDbDatabaseDataSource {
 
-    override suspend fun insertMovies(vararg movies: MoviesEntity) {
-        moviesDao.insertAll(movies = *movies)
+    override suspend fun insertMovies(movies: MoviesEntity) {
+        moviesDao.insertAll(movies = movies)
     }
 
     override suspend fun insertMovieDetails(movieDetailsEntity: MovieDetailsEntity) {
