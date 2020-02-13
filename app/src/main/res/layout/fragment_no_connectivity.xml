@@ -8,11 +8,35 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/iv_no_connectivity"
+        app:layout_constraintVertical_bias="0.4"
         android:src="@drawable/ic_no_connectivity"
         android:layout_margin="@dimen/margin_30"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_no_internet"
+        android:text="@string/NO_INTERNET_CONNECTION_ERROR"
+        android:layout_marginTop="@dimen/margin_10"
+        android:fontFamily="@font/ibmplexsans_bold"
+        android:textSize="@dimen/text_17"
+        app:layout_constraintTop_toBottomOf="@id/iv_no_connectivity"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/try_again_text"
+        android:layout_marginTop="@dimen/margin_30"
+        android:foreground="?attr/selectableItemBackground"
+        app:layout_constraintTop_toBottomOf="@id/tv_no_internet"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
