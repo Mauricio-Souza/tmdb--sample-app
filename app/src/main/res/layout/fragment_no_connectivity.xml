@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@android:color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/iv_no_connectivity"
-        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintVertical_bias="0.37"
         android:src="@drawable/ic_no_connectivity"
         android:layout_margin="@dimen/margin_30"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,7 +24,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/tv_no_internet"
         android:text="@string/NO_INTERNET_CONNECTION_ERROR"
-        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginTop="@dimen/margin_20"
         android:fontFamily="@font/ibmplexsans_bold"
         android:textSize="@dimen/text_17"
         app:layout_constraintTop_toBottomOf="@id/iv_no_connectivity"

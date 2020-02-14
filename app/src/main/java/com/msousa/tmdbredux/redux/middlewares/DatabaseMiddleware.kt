@@ -18,28 +18,28 @@ class DatabaseMiddleware(private val dataSource: ITMDbDatabaseDataSource) : INex
                 runDatabaseOperation(
                     onExecute = { dataSource.insertMovies(action.movies) },
                     onSuccess = { newAction = Result.Success(action.movies.toVO()) },
-                    onFailure = { error -> newAction = Result.Failure(error.toVO())}
+                    onFailure = { error -> newAction = Result.Failure(error)}
                 )
             }
             is InsertMovieDetails -> {
                 runDatabaseOperation(
                     onExecute = { dataSource.insertMovieDetails(action.movieEntity) },
                     onSuccess = { newAction = Result.Success(action.movieEntity.toVO()) },
-                    onFailure = { error -> newAction = Result.Failure(error.toVO()) }
+                    onFailure = { error -> newAction = Result.Failure(error) }
                 )
             }
             is SelectAllMovies -> {
                 runDatabaseOperation(
                     onExecute = { dataSource.selectAllMovies() },
                     onSuccess = { entity -> newAction = Result.Success(entity.toVO()) },
-                    onFailure = { error -> newAction = Result.Failure(error.toVO()) }
+                    onFailure = { error -> newAction = Result.Failure(error) }
                 )
             }
             is SelectMovieDetails -> {
                 runDatabaseOperation(
                     onExecute = { dataSource.selectMovieDetails(action.movieId) },
                     onSuccess = { entity -> newAction = Result.Success(entity.toVO()) },
-                    onFailure = { error -> newAction = Result.Failure(error.toVO()) }
+                    onFailure = { error -> newAction = Result.Failure(error) }
                 )
             }
         }

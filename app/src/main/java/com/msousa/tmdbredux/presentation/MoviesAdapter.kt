@@ -15,7 +15,7 @@ import com.msousa.tmdbredux.presentation.models.viewObjects.MovieVO
 import kotlinx.android.synthetic.main.recycler_movies_item_view.view.*
 
 class MoviesAdapter(
-    val action: (String, ImageView) -> Unit
+    val action: (String) -> Unit
 ) : ListAdapter<MovieVO, MoviesAdapter.ViewHolder>(diffCallback) {
 
     companion object {
@@ -42,7 +42,7 @@ class MoviesAdapter(
                 movieName?.text = title
                 movieRate?.text = voteAverage
                 moviePoster?.loadImageUrlWithCornerRadius(url = posterPath, radius = radius)
-                moviePoster?.setOnClickListener { action(id, moviePoster) }
+                moviePoster?.setOnClickListener { action(id) }
             }
         }
     }

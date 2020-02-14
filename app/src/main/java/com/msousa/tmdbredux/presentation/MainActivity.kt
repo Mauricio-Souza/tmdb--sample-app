@@ -2,26 +2,22 @@ package com.msousa.tmdbredux.presentation
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.ImageView
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.util.Pair
-import androidx.core.view.ViewCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.msousa.tmdbredux.LayoutResource
+import com.msousa.tmdbredux.ResourceId
+import com.msousa.tmdbredux.data.remote.exceptions.TMDbNoSuchDataFound
 import com.msousa.tmdbredux.presentation.models.observer.LoadingObserver
 import com.msousa.tmdbredux.presentation.models.observer.StateObserver
-import com.msousa.tmdbredux.presentation.models.viewObjects.ErrorMessageVO
 import com.msousa.tmdbredux.presentation.models.viewObjects.MoviesVO
-import com.msousa.tmdbredux.redux.actions.ViewAction.OnListItemClicked
+import com.msousa.tmdbredux.redux.actions.ViewAction
 import com.msousa.tmdbredux.redux.actions.ViewAction.OnMainActivityCreated
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
 
     private lateinit var moviesAdapter: MoviesAdapter
-    private lateinit var imageView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,16 +30,16 @@ class MainActivity : BaseActivity() {
 
         store.stateLiveData.observe(this, moviesObserver)
 
-        store.stateLiveData.observe(this, navigationObserver)
+        store.stateLiveData.observe(this, activityNavigationObserver)
+
+        store.stateLiveData.observe(this, fragmentNavigateObserver)
 
         store.stateLiveData.observe(this, errorObserver)
-
     }
 
     private fun initRecyclerView() {
-        moviesAdapter = MoviesAdapter { id, view ->
-            imageView = view
-            store.dispatcher(OnListItemClicked(this, id))
+        moviesAdapter = MoviesAdapter { id ->
+            store.dispatcher(ViewAction.OnListItemClicked(this, id))
         }
         recyclerMovies.layoutManager = GridLayoutManager(this, 2, RecyclerView.VERTICAL, false)
         recyclerMovies.adapter = moviesAdapter
@@ -60,17 +56,15 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private val navigationObserver = StateObserver<Intent> { intent ->
-        val imgViewPair = Pair.create<View, String>(
-            imageView,
-            ViewCompat.getTransitionName(imageView)
-        )
-        val options =
-            ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity, imgViewPair)
-        startActivity(intent, options.toBundle())
+    private val activityNavigationObserver = StateObserver<Intent> { intent ->
+        startActivity(intent)
     }
 
-    private val errorObserver = StateObserver<ErrorMessageVO> { error ->
-        showShortToast(error?.message)
+    private val fragmentNavigateObserver = StateObserver<Fragment> { fragment ->
+        fragment?.run { replaceFragment(this, ResourceId.container) }
+    }
+
+    private val errorObserver = StateObserver<TMDbNoSuchDataFound> {
+        store.dispatcher(ViewAction.OnNoSuchDataFound)
     }
 }

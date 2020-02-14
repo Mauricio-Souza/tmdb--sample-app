@@ -17,7 +17,7 @@ class ServerMiddleware(private val repository: ITMDbRepository) : INext {
                     onFailure = { error ->
                         newAction = when (error) {
                             is TMDbNoInternetException -> FromDatabase.SelectAllMovies
-                            else -> Result.Failure(error.toVO())
+                            else -> Result.Failure(error)
 
                         }
                     }
@@ -32,7 +32,7 @@ class ServerMiddleware(private val repository: ITMDbRepository) : INext {
                             is TMDbNoInternetException -> {
                                 FromDatabase.SelectMovieDetails(action.movieId.toLong())
                             }
-                            else -> Result.Failure(error.toVO())
+                            else -> Result.Failure(error)
                         }
                     }
                 )

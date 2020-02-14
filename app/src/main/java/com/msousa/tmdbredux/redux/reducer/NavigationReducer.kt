@@ -13,6 +13,9 @@ object NavigationReducer : IReducer {
                 newState = state.copy(data = action.invoke())
 
             }
+            is ViewAction.OnNoSuchDataFound -> {
+                newState = state.copy(data = action.invoke())
+            }
             else -> { }
         }
         emit(newState)

@@ -9,14 +9,16 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.view.View
 import androidx.core.text.toSpannable
+import androidx.fragment.app.Fragment
 import com.msousa.tmdbredux.*
+import com.msousa.tmdbredux.data.remote.exceptions.TMDbNoSuchDataFound
 import com.msousa.tmdbredux.extensions.getColorCompat
 import com.msousa.tmdbredux.extensions.getResourceValue
 import com.msousa.tmdbredux.extensions.loadImageUrlWithCornerRadius
 import com.msousa.tmdbredux.presentation.models.observer.LoadingObserver
 import com.msousa.tmdbredux.presentation.models.observer.StateObserver
 import com.msousa.tmdbredux.presentation.models.viewObjects.MovieDetailsVO
-import com.msousa.tmdbredux.redux.actions.ViewAction.OnMovieDetailsActivityCreated
+import com.msousa.tmdbredux.redux.actions.ViewAction
 import kotlinx.android.synthetic.main.activity_movie_details.*
 
 class MovieDetailsActivity : BaseActivity() {
@@ -26,16 +28,34 @@ class MovieDetailsActivity : BaseActivity() {
         setContentView(LayoutResource.activity_movie_details)
 
         intent.extras?.run {
-            store.dispatcher(OnMovieDetailsActivityCreated(getString(MOVIE_ID).orEmpty()))
+            store.dispatcher(ViewAction.OnMovieDetailsActivityCreated(getString(MOVIE_ID).orEmpty()))
         } ?: error(getString(StringResource.MISSING_ARGUMENT_REQUIRED_ERROR))
 
         store.stateLiveData.observe(this, movieDetailsObserver)
 
         store.stateLiveData.observe(this, loadingObserverBehavior)
+
+        store.stateLiveData.observe(this, errorObserver)
+
+        store.stateLiveData.observe(this, activityNavigationObserver)
+
+        store.stateLiveData.observe(this, fragmentNavigationObserver)
     }
 
     private val loadingObserverBehavior = LoadingObserver { visibility ->
         progressBar?.visibility = visibility
+    }
+
+    private val errorObserver = StateObserver<TMDbNoSuchDataFound> {
+        store.dispatcher(ViewAction.OnNoSuchDataFound)
+    }
+
+    private val activityNavigationObserver = StateObserver<Intent> { intent ->
+        startActivity(intent)
+    }
+
+    private val fragmentNavigationObserver = StateObserver<Fragment> { fragment ->
+        fragment?.run { replaceFragment(this, ResourceId.container) }
     }
 
     private val movieDetailsObserver = StateObserver<MovieDetailsVO> { movie ->

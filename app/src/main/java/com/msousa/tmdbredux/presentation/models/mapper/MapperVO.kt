@@ -65,7 +65,3 @@ fun MovieDetailsEntity.toVO() = MovieDetailsVO(
     voteAverage = voteAverage,
     voteCount = voteCount.toInt()
 )
-
-fun TMDbException.toVO() = ErrorMessageVO(
-    message = userMessage
-)
