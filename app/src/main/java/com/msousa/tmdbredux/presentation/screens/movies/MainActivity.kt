@@ -1,16 +1,17 @@
-package com.msousa.tmdbredux.presentation
+package com.msousa.tmdbredux.presentation.screens.movies
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.msousa.tmdbredux.LayoutResource
 import com.msousa.tmdbredux.ResourceId
 import com.msousa.tmdbredux.data.remote.exceptions.TMDbNoSuchDataFound
-import com.msousa.tmdbredux.presentation.models.observer.LoadingObserver
-import com.msousa.tmdbredux.presentation.models.observer.StateObserver
-import com.msousa.tmdbredux.presentation.models.viewObjects.MoviesVO
+import com.msousa.tmdbredux.presentation.observer.LoadingObserver
+import com.msousa.tmdbredux.presentation.observer.StateObserver
+import com.msousa.tmdbredux.presentation.models.vo.MoviesVO
+import com.msousa.tmdbredux.presentation.screens.base.BaseActivity
 import com.msousa.tmdbredux.redux.actions.ViewAction
 import com.msousa.tmdbredux.redux.actions.ViewAction.OnMainActivityCreated
 import kotlinx.android.synthetic.main.activity_main.*
@@ -41,8 +42,9 @@ class MainActivity : BaseActivity() {
         moviesAdapter = MoviesAdapter { id ->
             store.dispatcher(ViewAction.OnListItemClicked(this, id))
         }
-        recyclerMovies.layoutManager = GridLayoutManager(this, 2, RecyclerView.VERTICAL, false)
-        recyclerMovies.adapter = moviesAdapter
+
+        recyclerMovies?.layoutManager = GridLayoutManager(this, 2, VERTICAL, false)
+        recyclerMovies?.adapter = moviesAdapter
     }
 
     private val loadingObserverBehavior = LoadingObserver { visibility ->
@@ -61,10 +63,10 @@ class MainActivity : BaseActivity() {
     }
 
     private val fragmentNavigateObserver = StateObserver<Fragment> { fragment ->
-        fragment?.run { replaceFragment(this, ResourceId.container) }
+        fragment?.let { replaceFragment(it, ResourceId.container) }
     }
 
     private val errorObserver = StateObserver<TMDbNoSuchDataFound> {
-        store.dispatcher(ViewAction.OnNoSuchDataFound)
+        store.dispatcher(ViewAction.OnNoInternetConnection)
     }
 }

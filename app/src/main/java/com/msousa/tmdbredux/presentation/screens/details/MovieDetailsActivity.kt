@@ -1,4 +1,4 @@
-package com.msousa.tmdbredux.presentation
+package com.msousa.tmdbredux.presentation.screens.details
 
 import android.content.Context
 import android.content.Intent
@@ -14,10 +14,11 @@ import com.msousa.tmdbredux.*
 import com.msousa.tmdbredux.data.remote.exceptions.TMDbNoSuchDataFound
 import com.msousa.tmdbredux.extensions.getColorCompat
 import com.msousa.tmdbredux.extensions.getResourceValue
-import com.msousa.tmdbredux.extensions.loadImageUrlWithCornerRadius
-import com.msousa.tmdbredux.presentation.models.observer.LoadingObserver
-import com.msousa.tmdbredux.presentation.models.observer.StateObserver
-import com.msousa.tmdbredux.presentation.models.viewObjects.MovieDetailsVO
+import com.msousa.tmdbredux.extensions.loadImageUrl
+import com.msousa.tmdbredux.presentation.observer.LoadingObserver
+import com.msousa.tmdbredux.presentation.observer.StateObserver
+import com.msousa.tmdbredux.presentation.models.vo.MovieDetailsVO
+import com.msousa.tmdbredux.presentation.screens.base.BaseActivity
 import com.msousa.tmdbredux.redux.actions.ViewAction
 import kotlinx.android.synthetic.main.activity_movie_details.*
 
@@ -61,14 +62,15 @@ class MovieDetailsActivity : BaseActivity() {
     private val movieDetailsObserver = StateObserver<MovieDetailsVO> { movie ->
         movie?.run {
             scrollView?.visibility = View.VISIBLE
-            runtimeAndReleaseDateGroup?.visibility = View.VISIBLE
             showActionBarWithTitle(originalTitle)
             showActionBarWithBackButton()
-            ivPoster?.loadImageUrlWithCornerRadius(posterPath, radius)
+            ivPoster?.loadImageUrl(posterPath, radius)
             tvRuntime?.text = runtime
             tvReleaseDate?.text = releaseDate
             tvRate?.text = setVoteAverage(voteAverage)
             tvSynopsis?.text = overview
+            tvVotes?.text = voteCount
+            tvRevenue?.text = revenue
         }
     }
 
@@ -79,7 +81,7 @@ class MovieDetailsActivity : BaseActivity() {
         return SpannableStringBuilder().apply {
             append("$average/10")
             setSpan(
-                ForegroundColorSpan(getColorCompat(ColorResource.lightGray)),
+                ForegroundColorSpan(getColorCompat(ColorResource.mediumGray)),
                 start, end, Spannable.SPAN_EXCLUSIVE_INCLUSIVE
             )
             setSpan(RelativeSizeSpan(textSize), start, end, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)

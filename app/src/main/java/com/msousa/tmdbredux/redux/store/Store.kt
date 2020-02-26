@@ -4,8 +4,8 @@ import com.msousa.tmdbredux.MutableStateLiveData
 import com.msousa.tmdbredux.StateLiveData
 import com.msousa.tmdbredux.redux.actions.*
 import com.msousa.tmdbredux.redux.actions.Result.Loading
-import com.msousa.tmdbredux.redux.middlewares.IMiddleware
-import com.msousa.tmdbredux.redux.reducer.NavigationReducer
+import com.msousa.tmdbredux.redux.middlewares.ISideEffect
+import com.msousa.tmdbredux.redux.reducer.ViewActionReducer
 import com.msousa.tmdbredux.redux.reducer.ResultReducer
 import com.msousa.tmdbredux.redux.state.State
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class Store(
-    private val mainMiddleware: IMiddleware
+    private val sideEffect: ISideEffect
 ) : BaseStore(), IStore {
 
     private var currentState: State = State(Unit)
@@ -38,8 +38,7 @@ class Store(
 
     private suspend fun middleware(action: Action): Action {
         var newAction = action
-        _stateLiveData.postValue(currentState.copy(data = Loading))
-        mainMiddleware.apply(action).collect { action ->
+        sideEffect.apply(action).collect { action ->
             newAction = action
         }
         return newAction
@@ -54,7 +53,7 @@ class Store(
                 }
             }
             is ViewAction -> {
-                NavigationReducer.apply(currentState, action).collect { state ->
+                ViewActionReducer.apply(currentState, action).collect { state ->
                     newState = state
                 }
             }

@@ -1,22 +1,21 @@
-package com.msousa.tmdbredux.presentation
+package com.msousa.tmdbredux.presentation.screens.movies
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.msousa.tmdbredux.LayoutResource
-import com.msousa.tmdbredux.StringResource
-import com.msousa.tmdbredux.extensions.getString
-import com.msousa.tmdbredux.extensions.loadImageUrlWithCornerRadius
-import com.msousa.tmdbredux.presentation.models.viewObjects.MovieVO
+import com.msousa.tmdbredux.extensions.loadImageUrl
+import com.msousa.tmdbredux.presentation.models.vo.MovieVO
 import kotlinx.android.synthetic.main.recycler_movies_item_view.view.*
 
 class MoviesAdapter(
     val action: (String) -> Unit
-) : ListAdapter<MovieVO, MoviesAdapter.ViewHolder>(diffCallback) {
+) : ListAdapter<MovieVO, MoviesAdapter.ViewHolder>(
+    diffCallback
+) {
 
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<MovieVO>() {
@@ -41,7 +40,7 @@ class MoviesAdapter(
             item.run {
                 movieName?.text = title
                 movieRate?.text = voteAverage
-                moviePoster?.loadImageUrlWithCornerRadius(url = posterPath, radius = radius)
+                moviePoster?.loadImageUrl(url = posterPath, radius = radius)
                 moviePoster?.setOnClickListener { action(id) }
             }
         }

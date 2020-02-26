@@ -1,4 +1,4 @@
-package com.msousa.tmdbredux.presentation.models.viewObjects
+package com.msousa.tmdbredux.presentation.models.vo
 
 data class MovieDetailsVO (
     val homepage: String,
@@ -9,12 +9,12 @@ data class MovieDetailsVO (
     val popularity: Double,
     val posterPath: String,
     val releaseDate: String,
-    val revenue: Int,
+    val revenue: String,
     val runtime: String,
     val status: String,
     val tagline: String,
     val title: String,
     val voteAverage: String,
-    val voteCount: Int,
+    val voteCount: String,
     val radius: Int = 10
 )

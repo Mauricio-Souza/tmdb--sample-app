@@ -1,4 +1,4 @@
-package com.msousa.tmdbredux.presentation.models.observer
+package com.msousa.tmdbredux.presentation.observer
 
 import android.view.View
 import androidx.lifecycle.Observer

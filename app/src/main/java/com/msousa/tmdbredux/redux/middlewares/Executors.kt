@@ -1,6 +1,5 @@
 package com.msousa.tmdbredux.redux.middlewares
 
-import android.util.Log
 import com.msousa.tmdbredux.data.remote.exceptions.TMDbException
 import com.msousa.tmdbredux.data.remote.exceptions.TMDbNoInternetException
 import com.msousa.tmdbredux.data.remote.exceptions.TMDbNoSuchDataFound

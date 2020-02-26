@@ -1,4 +1,4 @@
-package com.msousa.tmdbredux.presentation.models.viewObjects
+package com.msousa.tmdbredux.presentation.models.vo
 
 data class MoviesVO (
     val name: String = "",

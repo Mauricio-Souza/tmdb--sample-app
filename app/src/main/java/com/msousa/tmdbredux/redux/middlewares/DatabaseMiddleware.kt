@@ -9,7 +9,7 @@ import com.msousa.tmdbredux.redux.actions.FromDatabase.InsertMovies
 import com.msousa.tmdbredux.redux.actions.FromDatabase.SelectMovieDetails
 import com.msousa.tmdbredux.redux.actions.Result
 
-class DatabaseMiddleware(private val dataSource: ITMDbDatabaseDataSource) : INext {
+class DatabaseMiddleware(private val dataSource: ITMDbDatabaseDataSource) : IMiddleware {
 
     override suspend fun onNext(action: Action): Action {
         var newAction = action

@@ -5,8 +5,7 @@
     android:id="@+id/container"
     android:background="@android:color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:animateLayoutChanges="true">
+    android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
@@ -32,7 +31,6 @@
                 android:background="@drawable/border_gray"
                 android:orientation="horizontal"
                 android:padding="@dimen/padding_3"
-                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@id/ivPoster"
                 app:layout_constraintLeft_toLeftOf="@id/ivPoster"
                 app:layout_constraintRight_toRightOf="@id/ivPoster"
@@ -97,6 +95,54 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="8.1" />
 
+                <TextView
+                    android:id="@+id/tvVotesTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/total_votes_text"
+                    android:textSize="@dimen/text_15"
+                    android:layout_marginTop="@dimen/margin_15"
+                    android:fontFamily="@font/ibmplexsans_semibold"
+                    app:layout_constraintTop_toBottomOf="@id/tvRate"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tvVotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ibmplexsans_bold"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_20"
+                    app:layout_constraintTop_toBottomOf="@id/tvVotesTitle"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tvRevenueTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/revenue_text"
+                    android:textSize="@dimen/text_15"
+                    android:layout_marginTop="@dimen/margin_15"
+                    android:fontFamily="@font/ibmplexsans_semibold"
+                    app:layout_constraintTop_toBottomOf="@id/tvVotes"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tvRevenue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ibmplexsans_bold"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_17"
+                    app:layout_constraintTop_toBottomOf="@id/tvRevenueTitle"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
@@ -138,17 +184,17 @@
                 app:layout_constraintTop_toBottomOf="@id/tvSynopsisText" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/horizontal_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.60" />
-
-            <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/vertical_guideline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.50" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/horizontal_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.50" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,4 +24,6 @@
     <!-- transitions name -->
     <string name="movie_poster_transition">movie_poster</string>
     <string name="try_again_text">Tentar novamente</string>
+    <string name="revenue_text">Revenue</string>
+    <string name="total_votes_text">Total votes</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.msousa.tmdbredux.presentation
+package com.msousa.tmdbredux.presentation.screens.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,8 +7,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.ViewModelProviders
-import com.msousa.tmdbredux.LayoutResource
-import com.msousa.tmdbredux.R
 import com.msousa.tmdbredux.redux.store.IStore
 import com.msousa.tmdbredux.redux.store.Store
 import org.kodein.di.KodeinAware
@@ -19,7 +17,7 @@ abstract class BaseActivity : AppCompatActivity(), LifecycleOwner, KodeinAware {
     override val kodein by kodein()
 
     private lateinit var lifecycleRegistry: LifecycleRegistry
-    protected lateinit var store: IStore
+    lateinit var store: IStore
 
     private val storeFactory: StoreFactory by instance()
 

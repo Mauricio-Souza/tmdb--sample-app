@@ -3,11 +3,11 @@ package com.msousa.tmdbredux.presentation.models.mapper
 import com.msousa.tmdbredux.BuildConfig
 import com.msousa.tmdbredux.data.local.entities.MovieDetailsEntity
 import com.msousa.tmdbredux.data.local.entities.MoviesEntity
-import com.msousa.tmdbredux.data.remote.exceptions.TMDbException
 import com.msousa.tmdbredux.data.remote.responses.Movie
 import com.msousa.tmdbredux.extensions.formatDate
+import com.msousa.tmdbredux.extensions.formatToMoney
 import com.msousa.tmdbredux.redux.middlewares.mappers.models.MovieListMapper
-import com.msousa.tmdbredux.presentation.models.viewObjects.*
+import com.msousa.tmdbredux.presentation.models.vo.*
 import com.msousa.tmdbredux.redux.middlewares.mappers.models.MovieDetailsMapper
 
 fun MoviesEntity.toVO() = MoviesVO(
@@ -57,11 +57,11 @@ fun MovieDetailsEntity.toVO() = MovieDetailsVO(
     popularity = popularity.toDouble(),
     posterPath = posterPath,
     releaseDate = releaseDate,
-    revenue = revenue.toInt(),
-    runtime = "$runtime min",
+    revenue = revenue.toDouble().formatToMoney(),
+    runtime = runtime,
     status = status,
     tagline = tagline,
     title = title,
     voteAverage = voteAverage,
-    voteCount = voteCount.toInt()
+    voteCount = voteCount
 )

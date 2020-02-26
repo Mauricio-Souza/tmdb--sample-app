@@ -7,8 +7,9 @@ import com.msousa.tmdbredux.NavigationRouter
 import com.msousa.tmdbredux.data.local.entities.MovieDetailsEntity
 import com.msousa.tmdbredux.data.local.entities.MoviesEntity
 import com.msousa.tmdbredux.data.remote.exceptions.TMDbException
-import com.msousa.tmdbredux.presentation.MovieDetailsActivity
-import com.msousa.tmdbredux.presentation.NoConnectivityScreen
+import com.msousa.tmdbredux.presentation.screens.error.NoInternetConnectivityFragment
+import com.msousa.tmdbredux.presentation.screens.details.MovieDetailsActivity
+import com.msousa.tmdbredux.presentation.screens.error.NoSuchDataFoundFragment
 
 sealed class Action
 
@@ -26,7 +27,11 @@ sealed class ViewAction : Action() {
     }
 
     object OnNoSuchDataFound : NavigationRouter<Fragment>, ViewAction() {
-        override fun invoke() = NoConnectivityScreen.getInstance()
+        override fun invoke() = NoSuchDataFoundFragment.getInstance()
+    }
+
+    object OnNoInternetConnection : NavigationRouter<Fragment>, ViewAction() {
+        override fun invoke() = NoInternetConnectivityFragment.getInstance()
     }
 
     object OnMainActivityCreated : ViewAction()

@@ -5,7 +5,7 @@ import com.msousa.tmdbredux.data.remote.exceptions.TMDbNoInternetException
 import com.msousa.tmdbredux.presentation.models.mapper.*
 import com.msousa.tmdbredux.redux.actions.*
 
-class ServerMiddleware(private val repository: ITMDbRepository) : INext {
+class ServerMiddleware(private val repository: ITMDbRepository) : IMiddleware {
 
     override suspend fun onNext(action: Action): Action {
         var newAction = action

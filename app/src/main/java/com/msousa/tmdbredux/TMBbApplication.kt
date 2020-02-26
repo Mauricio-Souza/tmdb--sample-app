@@ -4,11 +4,10 @@ import android.app.Application
 import com.msousa.tmdbredux.data.local.ITMDbDatabaseDataSource
 import com.msousa.tmdbredux.data.local.TMDbDatabaseDataSource
 import com.msousa.tmdbredux.data.local.TMDbDatabaseProvider
-import com.msousa.tmdbredux.data.local.dao.IMoviesDao
 import com.msousa.tmdbredux.data.remote.ITMDbRepository
 import com.msousa.tmdbredux.data.remote.TMDbRepository
 import com.msousa.tmdbredux.redux.middlewares.*
-import com.msousa.tmdbredux.presentation.StoreFactory
+import com.msousa.tmdbredux.presentation.screens.base.StoreFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -31,8 +30,8 @@ class TMBbApplication : Application(), KodeinAware {
         bind<ITMDbDatabaseDataSource>() with singleton {
             TMDbDatabaseDataSource(instance(), instance())
         }
-        bind<IMiddleware>() with singleton {
-            Middleware(
+        bind<ISideEffect>() with singleton {
+            SideEffect(
                 listOf(
                     instance<ServerMiddleware>(),
                     instance<DatabaseMiddleware>(),

@@ -1,7 +1,7 @@
 package com.msousa.tmdbredux
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.msousa.tmdbredux.presentation.models.observer.StateObserver
+import com.msousa.tmdbredux.presentation.observer.StateObserver
 import com.msousa.tmdbredux.redux.actions.Result
 import com.msousa.tmdbredux.redux.actions.ViewAction
 import com.msousa.tmdbredux.redux.state.State
