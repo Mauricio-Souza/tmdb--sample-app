@@ -26,6 +26,7 @@ class Store(
     override fun getState(): State = currentState
 
     override fun dispatcher(action: Action) {
+        _stateLiveData.postValue(State(Loading))
         uiScope.launch {
             var newAction = action
             withContext(Dispatchers.IO) {

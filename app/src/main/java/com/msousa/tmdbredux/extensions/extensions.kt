@@ -13,6 +13,8 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
+fun <T> T.render(block: T.() -> Unit) { apply { block() } }
+
 fun ImageView.loadImageUrl(url: String, radius: Int) {
     Glide.with(context)
         .load(url)

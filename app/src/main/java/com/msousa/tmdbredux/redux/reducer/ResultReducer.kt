@@ -16,9 +16,6 @@ object ResultReducer : IReducer {
             is Result.Failure -> {
                 newState = state.copy(data = action.error)
             }
-            is Result.Loading -> {
-                newState = state.copy(data = action)
-            }
         }
         emit(newState)
     }

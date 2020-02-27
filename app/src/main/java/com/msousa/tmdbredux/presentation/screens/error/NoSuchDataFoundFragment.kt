@@ -17,9 +17,5 @@ class NoSuchDataFoundFragment private constructor() : BaseFragment() {
         return inflater.inflate(LayoutResource.fragment_no_data_found, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     companion object { fun getInstance() = NoSuchDataFoundFragment() }
 }

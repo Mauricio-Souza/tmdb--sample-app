@@ -10,7 +10,6 @@ class SideEffect(
 
     override suspend fun apply(action: Action) = flow {
         var newAction = action
-        emit(Result.Loading)
         chain.forEach {
             newAction = it.onNext(newAction)
         }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.msousa.tmdbredux.LayoutResource
 import com.msousa.tmdbredux.ResourceId
 import com.msousa.tmdbredux.data.remote.exceptions.TMDbNoSuchDataFound
+import com.msousa.tmdbredux.extensions.render
 import com.msousa.tmdbredux.presentation.observer.LoadingObserver
 import com.msousa.tmdbredux.presentation.observer.StateObserver
 import com.msousa.tmdbredux.presentation.models.vo.MoviesVO
@@ -51,8 +52,8 @@ class MainActivity : BaseActivity() {
         progressBar?.visibility = visibility
     }
 
-    private val moviesObserver = StateObserver<MoviesVO> { movies ->
-        movies?.run {
+    private val moviesObserver = StateObserver<MoviesVO?> { movies ->
+        movies?.render {
             showActionBarWithTitle(name)
             moviesAdapter.submitList(items)
         }

@@ -15,6 +15,7 @@ import com.msousa.tmdbredux.data.remote.exceptions.TMDbNoSuchDataFound
 import com.msousa.tmdbredux.extensions.getColorCompat
 import com.msousa.tmdbredux.extensions.getResourceValue
 import com.msousa.tmdbredux.extensions.loadImageUrl
+import com.msousa.tmdbredux.extensions.render
 import com.msousa.tmdbredux.presentation.observer.LoadingObserver
 import com.msousa.tmdbredux.presentation.observer.StateObserver
 import com.msousa.tmdbredux.presentation.models.vo.MovieDetailsVO
@@ -59,18 +60,18 @@ class MovieDetailsActivity : BaseActivity() {
         fragment?.run { replaceFragment(this, ResourceId.container) }
     }
 
-    private val movieDetailsObserver = StateObserver<MovieDetailsVO> { movie ->
-        movie?.run {
-            scrollView?.visibility = View.VISIBLE
-            showActionBarWithTitle(originalTitle)
-            showActionBarWithBackButton()
-            ivPoster?.loadImageUrl(posterPath, radius)
-            tvRuntime?.text = runtime
-            tvReleaseDate?.text = releaseDate
-            tvRate?.text = setVoteAverage(voteAverage)
-            tvSynopsis?.text = overview
-            tvVotes?.text = voteCount
-            tvRevenue?.text = revenue
+    private val movieDetailsObserver = StateObserver<MovieDetailsVO?> { movie ->
+        movie?.render {
+                scrollView?.visibility = View.VISIBLE
+                showActionBarWithTitle(originalTitle)
+                showActionBarWithBackButton()
+                ivPoster?.loadImageUrl(posterPath, radius)
+                tvRuntime?.text = runtime
+                tvReleaseDate?.text = releaseDate
+                tvRate?.text = setVoteAverage(voteAverage)
+                tvSynopsis?.text = overview
+                tvVotes?.text = voteCount
+                tvRevenue?.text = revenue
         }
     }
 
