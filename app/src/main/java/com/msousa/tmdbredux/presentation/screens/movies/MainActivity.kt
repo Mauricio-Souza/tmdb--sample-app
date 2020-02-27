@@ -13,8 +13,8 @@ import com.msousa.tmdbredux.presentation.observer.LoadingObserver
 import com.msousa.tmdbredux.presentation.observer.StateObserver
 import com.msousa.tmdbredux.presentation.models.vo.MoviesVO
 import com.msousa.tmdbredux.presentation.screens.base.BaseActivity
+import com.msousa.tmdbredux.redux.actions.NavigateAction
 import com.msousa.tmdbredux.redux.actions.ViewAction
-import com.msousa.tmdbredux.redux.actions.ViewAction.OnMainActivityCreated
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -26,7 +26,7 @@ class MainActivity : BaseActivity() {
         setContentView(LayoutResource.activity_main)
         initRecyclerView()
 
-        store.dispatcher(OnMainActivityCreated)
+        store.dispatcher(ViewAction.FetchMovieList)
 
         store.stateLiveData.observe(this, loadingObserverBehavior)
 
@@ -41,7 +41,7 @@ class MainActivity : BaseActivity() {
 
     private fun initRecyclerView() {
         moviesAdapter = MoviesAdapter { id ->
-            store.dispatcher(ViewAction.OnListItemClicked(this, id))
+            store.dispatcher(NavigateAction.OpenMovieDetailsScreen(this, id))
         }
 
         recyclerMovies?.layoutManager = GridLayoutManager(this, 2, VERTICAL, false)
@@ -68,6 +68,6 @@ class MainActivity : BaseActivity() {
     }
 
     private val errorObserver = StateObserver<TMDbNoSuchDataFound> {
-        store.dispatcher(ViewAction.OnNoInternetConnection)
+        store.dispatcher(NavigateAction.ShowNoInternetConnectionScreen)
     }
 }

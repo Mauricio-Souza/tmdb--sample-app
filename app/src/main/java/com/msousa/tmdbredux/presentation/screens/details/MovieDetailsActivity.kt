@@ -20,6 +20,7 @@ import com.msousa.tmdbredux.presentation.observer.LoadingObserver
 import com.msousa.tmdbredux.presentation.observer.StateObserver
 import com.msousa.tmdbredux.presentation.models.vo.MovieDetailsVO
 import com.msousa.tmdbredux.presentation.screens.base.BaseActivity
+import com.msousa.tmdbredux.redux.actions.NavigateAction
 import com.msousa.tmdbredux.redux.actions.ViewAction
 import kotlinx.android.synthetic.main.activity_movie_details.*
 
@@ -30,7 +31,7 @@ class MovieDetailsActivity : BaseActivity() {
         setContentView(LayoutResource.activity_movie_details)
 
         intent.extras?.run {
-            store.dispatcher(ViewAction.OnMovieDetailsActivityCreated(getString(MOVIE_ID).orEmpty()))
+            store.dispatcher(ViewAction.FetchMovieDetails(getString(MOVIE_ID).orEmpty()))
         } ?: error(getString(StringResource.MISSING_ARGUMENT_REQUIRED_ERROR))
 
         store.stateLiveData.observe(this, movieDetailsObserver)
@@ -49,7 +50,7 @@ class MovieDetailsActivity : BaseActivity() {
     }
 
     private val errorObserver = StateObserver<TMDbNoSuchDataFound> {
-        store.dispatcher(ViewAction.OnNoSuchDataFound)
+        store.dispatcher(NavigateAction.ShowNoSuchDataFoundScreen)
     }
 
     private val activityNavigationObserver = StateObserver<Intent> { intent ->

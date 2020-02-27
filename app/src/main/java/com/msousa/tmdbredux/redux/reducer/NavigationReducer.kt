@@ -1,24 +1,24 @@
 package com.msousa.tmdbredux.redux.reducer
 
 import com.msousa.tmdbredux.redux.actions.Action
-import com.msousa.tmdbredux.redux.actions.ViewAction.OnNoInternetConnection
-import com.msousa.tmdbredux.redux.actions.ViewAction.OnNoSuchDataFound
-import com.msousa.tmdbredux.redux.actions.ViewAction.OnListItemClicked
+import com.msousa.tmdbredux.redux.actions.NavigateAction.ShowNoInternetConnectionScreen
+import com.msousa.tmdbredux.redux.actions.NavigateAction.ShowNoSuchDataFoundScreen
+import com.msousa.tmdbredux.redux.actions.NavigateAction.OpenMovieDetailsScreen
 import com.msousa.tmdbredux.redux.state.State
 import kotlinx.coroutines.flow.flow
 
-object ViewActionReducer : IReducer {
+object NavigationReducer : IReducer {
     override suspend fun apply(state: State, action: Action) = flow {
         var newState = state
         when (action) {
-            is OnListItemClicked -> {
+            is OpenMovieDetailsScreen -> {
                 newState = state.copy(data = action.invoke())
 
             }
-            is OnNoSuchDataFound -> {
+            is ShowNoSuchDataFoundScreen -> {
                 newState = state.copy(data = action.invoke())
             }
-            is OnNoInternetConnection -> {
+            is ShowNoInternetConnectionScreen -> {
                 newState = state.copy(data = action.invoke())
             }
         }

@@ -21,21 +21,22 @@ sealed class Result : Action() {
 }
 
 sealed class ViewAction : Action() {
+    object FetchMovieList : ViewAction()
+    data class FetchMovieDetails(val movieId: String) : ViewAction()
+}
 
-    data class OnListItemClicked(val context: Context, val id: String) : NavigationRouter<Intent>, ViewAction() {
+sealed class NavigateAction : Action() {
+    data class OpenMovieDetailsScreen(val context: Context, val id: String) : NavigationRouter<Intent>, NavigateAction() {
         override fun invoke() = MovieDetailsActivity.getIntent(context, id)
     }
 
-    object OnNoSuchDataFound : NavigationRouter<Fragment>, ViewAction() {
+    object ShowNoSuchDataFoundScreen : NavigationRouter<Fragment>, NavigateAction() {
         override fun invoke() = NoSuchDataFoundFragment.getInstance()
     }
 
-    object OnNoInternetConnection : NavigationRouter<Fragment>, ViewAction() {
+    object ShowNoInternetConnectionScreen : NavigationRouter<Fragment>, NavigateAction() {
         override fun invoke() = NoInternetConnectivityFragment.getInstance()
     }
-
-    object OnMainActivityCreated : ViewAction()
-    data class OnMovieDetailsActivityCreated(val movieId: String) : ViewAction()
 }
 
 sealed class FromDatabase : Action() {

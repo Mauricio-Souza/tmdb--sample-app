@@ -10,7 +10,7 @@ class ServerMiddleware(private val repository: ITMDbRepository) : IMiddleware {
     override suspend fun onNext(action: Action): Action {
         var newAction = action
         when (action) {
-            is ViewAction.OnMainActivityCreated -> {
+            is ViewAction.FetchMovieList -> {
                 runHttpCall(
                     onExecute = { repository.getMovies() },
                     onSuccess = { data -> newAction = FromDatabase.InsertMovies(data.toEntity()) },
@@ -23,7 +23,7 @@ class ServerMiddleware(private val repository: ITMDbRepository) : IMiddleware {
                     }
                 )
             }
-            is ViewAction.OnMovieDetailsActivityCreated -> {
+            is ViewAction.FetchMovieDetails -> {
                 runHttpCall(
                     onExecute = { repository.getMovieDetails(action.movieId) },
                     onSuccess = { data -> newAction = FromDatabase.InsertMovieDetails(data.toEntity()) },

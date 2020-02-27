@@ -5,7 +5,7 @@ import com.msousa.tmdbredux.StateLiveData
 import com.msousa.tmdbredux.redux.actions.*
 import com.msousa.tmdbredux.redux.actions.Result.Loading
 import com.msousa.tmdbredux.redux.middlewares.ISideEffect
-import com.msousa.tmdbredux.redux.reducer.ViewActionReducer
+import com.msousa.tmdbredux.redux.reducer.NavigationReducer
 import com.msousa.tmdbredux.redux.reducer.ResultReducer
 import com.msousa.tmdbredux.redux.state.State
 import kotlinx.coroutines.Dispatchers
@@ -53,8 +53,8 @@ class Store(
                     newState = state
                 }
             }
-            is ViewAction -> {
-                ViewActionReducer.apply(currentState, action).collect { state ->
+            is NavigateAction -> {
+                NavigationReducer.apply(currentState, action).collect { state ->
                     newState = state
                 }
             }

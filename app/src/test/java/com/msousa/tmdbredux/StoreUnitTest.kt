@@ -48,7 +48,7 @@ class StoreUnitTest {
 
     @Test
     fun `should change app state to loading status`() {
-        store.dispatcher(ViewAction.OnMainActivityCreated)
+        store.dispatcher(ViewAction.FetchMovieList)
         verify(stateObserver, times(1)).onChanged(State(data = Result.Loading))
         assertEquals(store.stateLiveData.value, State(data = Result.Loading))
     }
